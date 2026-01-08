@@ -1,5 +1,5 @@
 import { Steps, Callout, Cards, Card } from 'nextra/components'
-import { FileBadge, ShieldCheck, Globe, Code } from 'lucide-react'
+import { FileBadge, ShieldCheck, Globe, Code, Save, AlertTriangle } from 'lucide-react'
 
 # Requesting a New Certificate
 
@@ -40,13 +40,14 @@ Toggle **"Manual Control"** if you need to override the default Identity fields 
 *   **Country (C)**: ISO Code.
 
 
-### 4. Submit & Download
+### 4. Generate & Save
 Click **Generate**.
-*   **Private Key**: The system will prompt you to download the `.key` file. **This is the only time it is available.**
-*   **Certificate**: The `.pem` / `.crt` file will be available for download immediately.
+*   The **Certificate (.pem)** and **Private Key (.key)** will be generated.
+*   You can copy them immediately or access them later from the **Certificate Details** page.
+
+<Callout type="info" emoji={<Save className="w-5 h-5" />}>
+  **Storage:** Your Private Key is securely stored. You can view it anytime by clicking **"View Details"** on the certificate list.
+</Callout>
 </Steps>
 
-<Callout type="warning" emoji="⚠️">
-  **Security:** Your **Private Key** is shown/downloaded **ONLY ONCE**. Store it securely immediately. If lost, you must revoke and reissue the certificate.
-</Callout>
 

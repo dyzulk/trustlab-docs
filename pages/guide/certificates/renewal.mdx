@@ -8,14 +8,17 @@ You will receive an email notification:
 - **7 days** before expiration.
 - **1 day** before expiration.
 
-## How to Renew
+## How to Renew (Manual Re-issue)
 
-1. Log in to TrustLab.
-2. Navigate to **"My Certificates"**.
-3. Identify certificates marked with the **"Expiring Soon"** badge.
-4. Click the **"Renew"** button next to the certificate.
-5. Review the details (CN, SANs). You can add or remove SANs at this stage.
-6. Click **Confirm Renewal**.
+To renew a certificate, you simply generate a fresh one with the same domain name.
+
+1.  Go to **Certificates** and click **"Generate New"**.
+2.  **Identity**: Enter the **same Common Name (CN)** as your expiring certificate.
+3.  **Generate**: The system will issue a new certificate with a fresh validity period.
+4.  **Replace**: Download the new `.crt` (and `.key` if you didn't reuse the CSI) and replace the files on your server.
+
+> [!NOTE]
+> The old certificate will remain valid until it expires naturally. You can safely delete it after verifying the new one works.
 
 ## What Happens Next?
 - A **new certificate** is generated with a new validity period.

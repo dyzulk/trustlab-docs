@@ -1,5 +1,5 @@
 import { Tabs, Steps, Cards, Card, Callout } from 'nextra/components'
-import { Monitor, Smartphone } from 'lucide-react'
+import { Monitor, Smartphone, AlertTriangle, Info } from 'lucide-react'
 
 # Installing Root CA
 
@@ -43,11 +43,11 @@ Select your distribution to get the optimized installation command:
   <Card icon={<Smartphone className="w-6 h-6" />} title="macOS / iOS Profile (.mobileconfig)" href="https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.mobileconfig" arrow />
 </Cards>
 
-<Callout type="warning" emoji="⚠️">
+<Callout type="warning" emoji={<AlertTriangle className="w-5 h-5" />}>
   **Windows Users:** You **MUST** right-click the `.bat` file and select **"Run as Administrator"**. Double-clicking directly will likely fail due to permission restrictions.
 </Callout>
 
-<Callout type="info" emoji="ℹ️">
+<Callout type="info" emoji={<Info className="w-5 h-5" />}>
   **Apple Users:** After downloading the profile, go to **System Settings > Privacy & Security > Profiles** to install it. For iOS, see the *Individual Installation* section below for detailed trust steps.
 </Callout>
 

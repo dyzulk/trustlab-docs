@@ -7,17 +7,16 @@ Revocation invalidates a certificate before its expiration date. This is critica
 - **Service Change**: The domain name effectively no longer belongs to the service.
 - **Mistake**: The certificate was issued with incorrect details.
 
-## How to Revoke
+## How to Remove / Revoke
 
-1. Open the Certificate Detail page.
-2. Click the **"Revoke"** button (Danger Zone).
-3. Select a **Reason Code**:
-   - `unspecified` (0)
-   - `keyCompromise` (1)
-   - `cACompromise` (2)
-   - `superseded` (4)
-   - `cessationOfOperation` (5)
-4. Confirm the action.
+If a certificate is compromised or no longer needed, you can remove it from the system.
+
+1.  Go to the **Certificates** list.
+2.  Identify the certificate to remove.
+3.  Click the **Trash Icon** (Delete) on the right side of the row.
+4.  **Confirm**: Type `DELETE` in the confirmation modal to permanently remove the certificate and its private key from TrustLab.
+
+![Delete Certificate Action](/images/guide/certificates_list_view_1767869137654.png)
 
 ## CRL (Certificate Revocation List)
 Once revoked, the certificate serial number is added to the TrustLab CRL. All clients checking the CRL will immediately reject the certificate.

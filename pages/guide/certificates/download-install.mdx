@@ -10,12 +10,16 @@ Once your certificate is issued, you can download it in various formats suitable
 | **PFX / PKCS#12** | `.pfx`, `.p12` | IIS (Windows), Microsoft Exchange, Client Certificates (S/MIME). Contains both key and cert. |
 | **JKS (Java)** | `.jks` | Java applications (Tomcat, Spring Boot). |
 
-## How to Download
+## How to Download (Copy & Save)
 
-1. Go to **"My Certificates"** in the dashboard.
-2. Click on the certificate ID or the **"View"** button.
-3. Scroll to the **"Downloads"** section.
-4. Select the format you need and click **Download**.
+The dashboard allows you to copy the raw certificate data directly.
+
+1.  Navigate to **"My Certificates"** and click the **View (Eye Icon)** button on your certificate.
+2.  **Certificate:** Scroll to the "Certificate (CRT)" section and click the **Copy Icon** in the top right. Paste this into a file named `domain.crt` or `domain.pem`.
+3.  **Private Key:** Scroll to the "Private Key (KEY)" section, click **Show**, then click the **Copy Icon**. Paste this into a file named `domain.key`.
+
+> [!TIP]
+> Use a plain text editor (Notepad, VS Code, Nano) to save these files. Do not use Word or Rich Text editors.
 
 > [!WARNING]
 > The **Private Key** is generated securely. If you lose it, you cannot recover it. You must revoke and re-issue the certificate.

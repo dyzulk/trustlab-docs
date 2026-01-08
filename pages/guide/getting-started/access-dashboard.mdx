@@ -1,5 +1,5 @@
 import { Callout, Steps, Cards, Card } from 'nextra/components'
-import { Monitor, Smartphone, LayoutDashboard, Key, Shield } from 'lucide-react'
+import { Monitor, Smartphone, LayoutDashboard, Key, Shield, Info, Clock, AlertTriangle } from 'lucide-react'
 
 # Accessing Dashboard
 
@@ -19,7 +19,7 @@ We prioritize security by offering modern, passwordless authentication options.
 ### 1. Single Sign-On (SSO)
 The fastest way to log in. Click **Continue with Google** or **Continue with GitHub**.
 
-<Callout type="info" emoji="ℹ️">
+<Callout type="info" emoji={<Info className="w-5 h-5" />}>
 **SSO Behavior:**
 *   **Existing Users:** You can only Log In via SSO if your social email address is already registered/linked to your account.
 *   **New Users:** You can **Register** a new account instantly by clicking the Social Login buttons on the *Sign In* or *Register* page.
@@ -39,7 +39,7 @@ You will receive an email with a unique, time-sensitive login link.
 Click the **"Sign in to TrustLab"** button in the email. You will be instantly logged in to the dashboard.
 </Steps>
 
-<Callout type="warning" emoji="⏳">
+<Callout type="warning" emoji={<Clock className="w-5 h-5" />}>
   **Expiration:** Magic links are valid for **15 minutes** only. If it expires, simply request a new one by entering your email again.
 </Callout>
 
