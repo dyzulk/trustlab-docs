@@ -43,7 +43,7 @@ export function LandingPage() {
           icon={<Shield className="w-6 h-6 text-emerald-500" />}
           title="Private Root CA"
           description="Your own sovereign Certificate Authority. Trusted by your devices, unreachable by the public internet."
-          link="/guide/concepts"
+          link="/guide/concepts/pki-undamentals"
         />
         <FeatureCard 
           icon={<Globe className="w-6 h-6 text-blue-500" />}
