@@ -1,18 +1,13 @@
-import { CertificateDownload } from '../../../components/CertificateDownload'
+import { Tabs } from 'nextra/components'
+import { Steps } from 'nextra/components'
 
 # Installing Root CA
 
 To ensure your browser trusts certificates issued by TrustLab, you must install our Root CA.
 
-<div className="my-8">
-  <CertificateDownload />
-</div>
+## Quick Installation (Bundle)
 
-## Quick Installation (Recommended)
-
-Instantly install all TrustLab Root & Intermediate certificates using our automated scripts.
-
-import { Tabs } from 'nextra/components'
+Instantly install **ALL** TrustLab Root & Intermediate certificates using our automated bundle scripts.
 
 ### Linux / Server (CLI)
 
@@ -41,96 +36,79 @@ Select your distribution to get the optimized installation command:
   </Tabs.Tab>
 </Tabs>
 
-### Windows
-[Download Auto-Installer (.bat)](https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.bat)  
-*Right-click and Run as Administrator explicitly.*
-
-### macOS / iOS
-[Download Configuration Profile (.mobileconfig)](https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.mobileconfig)  
-*Go to System Settings > Privacy & Security > Profiles to install after downloading.*
+### Windows / macOS
+*   **Windows**: [Download Bundle Installer (.bat)](https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.bat) (Right-click > Run as Admin)
+*   **macOS/iOS**: [Download Configuration Profile (.mobileconfig)](https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.mobileconfig)
 
 ---
 
-import { Steps } from 'nextra/components'
+## Individual Certificate Installation
 
-## Manual Installation Guide
-
-If you prefer to install certificates manually, follow these steps for your operating system.
+If you need to install specific certificates individually (e.g. only Root, or specific Intermediate), use the options below.
 
 <Tabs items={['Windows', 'macOS', 'Android', 'Linux']}>
   <Tabs.Tab>
     <Steps>
-      ### Download Certificates
-      Download the certificates you need:
-      *   **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** (Required)
-      *   [Intermediate CA - 4096 (.crt)](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-4096.crt)
-      *   [Intermediate CA - 2048 (.crt)](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-2048.crt)
+      ### Download Certificate
+      Choose the format that works best for you:
 
-      ### Install Root CA
-      Double-click `dydev-its-true.crt` -> **Install Certificate**.
-      Select **Local Machine** -> Place in **Trusted Root Certification Authorities**.
+      | Certificate | Raw File | Auto-Installer Script |
+      | :--- | :--- | :--- |
+      | **Root CA** | **[dydev-its-true.crt](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** | **[Installer (.bat)](https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-dydev-its-true.bat)** |
+      | **Intermediate (4096)** | [trustlab-intermediate-ca-4096.crt](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-4096.crt) | [Installer (.bat)](https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-trustlab-intermediate-ca-4096.bat) |
+      | **Intermediate (2048)** | [trustlab-intermediate-ca-2048.crt](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-2048.crt) | [Installer (.bat)](https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-trustlab-intermediate-ca-2048.bat) |
 
-      ### Install Intermediates (Optional)
-      If installing Intermediates:
-      Double-click the file -> **Install Certificate**.
-      Select **Local Machine** -> Place in **Intermediate Certification Authorities**.
-    </Steps>
-  </Tabs.Tab>
-  <Tabs.Tab>
-    <Steps>
-      ### Download Certificates
-      *   **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)**
-      *   [Intermediate CA - 4096 (.crt)](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-4096.crt)
-      *   [Intermediate CA - 2048 (.crt)](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-2048.crt)
+      *For Scripts: Right-click the `.bat` file and select "Run as Administrator".*
 
-      ### Add to Keychain
-      Double-click all downloaded files to open **Keychain Access**.
-      Ensure they are added to the **System** keychain.
-
-      ### Trust Root CA
-      Find "DyDev Its True" (Root CA) in the list.
-      Expand **Trust** -> Change to **Always Trust**.
-      *(Intermediates do not need manual trust settings if Root is trusted)*.
-    </Steps>
-  </Tabs.Tab>
-  <Tabs.Tab>
-    <Steps>
-      ### Download Certificates
-      *   **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)**
-      *   [Intermediate CA - 4096 (.crt)](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-4096.crt)
-
-      ### Install via Settings
-      Go to **Settings** > **Security** > **Encryption & Credentials**.
-      Tap **Install a certificate** > **CA Certificate**.
-      Select and install the Root CA first, then the Intermediates.
+      ### Manual Install (Raw File)
+      1. Double-click the `.crt` file -> **Install Certificate**.
+      2. Select **Local Machine**.
+      3. For Root: Place in **Trusted Root Certification Authorities**.
+      4. For Intermediate: Place in **Intermediate Certification Authorities**.
     </Steps>
   </Tabs.Tab>
   <Tabs.Tab>
     <Steps>
       ### Download
-      Download the files using `curl`:
-      ```bash
-      # Root CA
-      curl -LO https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt
       
-      # Intermediates
-      curl -LO https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-4096.crt
-      curl -LO https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-2048.crt
-      ```
+      | Certificate | Raw File | Profile |
+      | :--- | :--- | :--- |
+      | **Root CA** | **[dydev-its-true.crt](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** | **[Profile (.mobileconfig)](https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-dydev-its-true.mobileconfig)** |
+      | **Intermediate (4096)** | [4096.crt](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-4096.crt) | [Profile (.mobileconfig)](https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-trustlab-intermediate-ca-4096.mobileconfig) |
 
-      ### Install (Debian/Ubuntu)
-      Copy all `.crt` files to the CA directory:
+      ### Install
+      *   **Profile**: Double-click `.mobileconfig` -> Go to System Settings -> Privacy & Security -> Profiles -> Install.
+      *   **Raw**: Double-click `.crt` -> Keychain Access -> System -> **Always Trust**.
+    </Steps>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Steps>
+      ### Download
+      
+      | Certificate | Raw File | DER Format |
+      | :--- | :--- | :--- |
+      | **Root CA** | **[dydev-its-true.crt](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** | **[dydev-its-true.der](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.der)** |
+
+      ### Install
+      Settings -> Security -> Encryption & Credentials -> Install a certificate -> CA Certificate.
+    </Steps>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Steps>
+      ### Download & Install (CLI)
+      You can download the raw file or run the installer script directly:
+
+      | Certificate | Raw File | One-Liner Installer |
+      | :--- | :--- | :--- |
+      | **Root CA** | [dydev-its-true.crt](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt) | `curl -sL https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-dydev-its-true.sh | sudo bash` |
+      | **Intermediate** | [4096.crt](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-4096.crt) | `curl -sL https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-trustlab-intermediate-ca-4096.sh | sudo bash` |
+
+      ### Manual Place
+      If using raw file:
       ```bash
       sudo cp *.crt /usr/local/share/ca-certificates/
-      ```
-
-      ### Update Store
-      Update the CA store:
-      ```bash
       sudo update-ca-certificates
       ```
-      *For RHEL/CentOS, copy to `/etc/pki/ca-trust/source/anchors/` and run `update-ca-trust`.*
     </Steps>
   </Tabs.Tab>
 </Tabs>
-
