@@ -1,5 +1,96 @@
+import { Callout, Steps, Cards, Card } from 'nextra/components'
+import { Monitor, Smartphone, LayoutDashboard, Key, Shield } from 'lucide-react'
+
 # Accessing Dashboard
 
-1. Navigate to [https://trustlab.dyzulk.com](https://trustlab.dyzulk.com).
-2. Click "Login".
-3. Use your SSO credentials or Magic Link.
+The **TrustLab Dashboard** is your central command center for managing certificates. Here you can request new certificates, download keys, and manage existing ones.
+
+![TrustLab Login Interface](/images/guide/login-screen.png)
+
+## Authentication Methods
+
+We prioritize security by offering modern, passwordless authentication options.
+
+<Cards>
+  <Card icon={<Shield className="w-6 h-6" />} title="SSO (Google / GitHub)" href="#1-single-sign-on-sso" arrow />
+  <Card icon={<Key className="w-6 h-6" />} title="Magic Link (Email)" href="#2-magic-link" arrow />
+</Cards>
+
+### 1. Single Sign-On (SSO)
+The fastest way to log in. Click **Continue with Google** or **Continue with GitHub**.
+
+<Callout type="info" emoji="ℹ️">
+**SSO Behavior:**
+*   **Existing Users:** You can only Log In via SSO if your social email address is already registered/linked to your account.
+*   **New Users:** You can **Register** a new account instantly by clicking the Social Login buttons on the *Sign In* or *Register* page.
+</Callout>
+
+### 2. Magic Link
+Secure, passwordless login via email.
+
+<Steps>
+### Enter Email
+Input your registered email address in the login form and click **"Continue with Email"**.
+
+### Check Inbox
+You will receive an email with a unique, time-sensitive login link.
+
+### Click to Verify
+Click the **"Sign in to TrustLab"** button in the email. You will be instantly logged in to the dashboard.
+</Steps>
+
+<Callout type="warning" emoji="⏳">
+  **Expiration:** Magic links are valid for **15 minutes** only. If it expires, simply request a new one by entering your email again.
+</Callout>
+
+## Dashboard Overview
+
+Upon successful login, you will land on the main dashboard.
+
+![TrustLab Dashboard Overview](/images/guide/dashboard-screen.png)
+
+This central hub allows you to access:
+*   **Active Certificates**: View all valid certificates issued to you.
+*   **Request Certificate**: The wizard to generate a new Private Key and CSR.
+*   **Revocation**: Interface to mark lost or compromised certificates as invalid.
+
+## Registration
+
+New users can create an account to start managing certificates.
+
+![TrustLab Registration Interface](/images/guide/register-screen.png)
+
+<Steps>
+### Option A: Social Registration (Instant)
+1. Click **Continue with Google** or **Continue with GitHub**.
+2. **Set Password:** For security, you will be asked to create a password for your account.
+
+![Set Password Screen](/images/guide/set-password-after-social-screen.png)
+
+### Option B: Email Registration
+1.  Click **"Sign up"** or fill the form.
+2.  Provide your details and password.
+3.  **Verify Email:** Click the link sent to your inbox to activate.
+</Steps>
+
+## Password Recovery
+
+If you lose access to your account, you can reset your password securely.
+
+![TrustLab Forgot Password Interface](/images/guide/forgot-password-screen.png)
+
+1. Click **"Forgot password?"** on the login screen.
+2. Enter your registered email address.
+3. Check your inbox for a password reset link.
+4. Create a new password and log in.
+
+## Troubleshooting
+
+### I didn't receive the Magic Link
+*   **Check Spam/Junk**: It often lands there for corporate domains.
+*   **Wait 1-2 Minutes**: Email delivery can sometimes be delayed.
+*   **Whitelist Sender**: Add `@trustlab.dyzulk.com` to your email provider's **Safe Senders** list to prevent it from being blocked.
+
+### Access Denied / User Not Found
+*   **Typos**: Double-check your email address.
+*   **Not Registered**: If you haven't created an account yet, please **Sign Up** first. You cannot log in via SSO if your email is not in our system (unless you use the Register flow).

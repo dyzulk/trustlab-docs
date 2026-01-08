@@ -1,31 +1,52 @@
+import { Steps, Callout, Cards, Card } from 'nextra/components'
+import { FileBadge, ShieldCheck, Globe, Code } from 'lucide-react'
+
 # Requesting a New Certificate
 
-TrustLab allows you to request private SSL/TLS certificates for various internal uses.
+TrustLab provides a streamlined wizard to generate private SSL/TLS certificates for your internal infrastructure.
 
 ## Prerequisites
-- You must have an active TrustLab account.
-- You must have the **Root CA** installed on your machine.
+Before starting, ensure you have:
+*   Active TrustLab account access.
+*   **Root CA** installed on your machine (to trust the generated certs).
 
-## Step-by-Step Guide
+---
 
-1. **Log in to Dashboard**
-   Navigate to the TrustLab Dashboard and login with your credentials.
+<Steps>
+### 1. Open Certificates Menu
+Navigate to the **Certificates** page. This view lists all your active and expired certificates. Click the **"Generate New"** (or "+") button to start.
 
-2. **Navigate to "New Certificate"**
-   Click on the **"New Request"** button in the top navigation bar or the main dashboard card.
+![Certificates List](/images/guide/certificates-screen.png)
 
-3. **Select Certificate Profile**
-   Choose the profile that matches your need:
-   - **Internal Web Server**: For HTTPS on internal tools (e.g., specific IP or `.local` domains).
-   - **User / S/MIME**: For email signing and encryption.
-   - **Code Signing**: For signing scripts and executables.
+### 2. Enter Domain Details (Default Mode)
+By default, you only need to provide the Identity. The system will auto-fill the Organization & Location metadata.
 
-4. **Fill in Details**
-   - **Common Name (CN)**: The primary domain name or IP address (e.g., `internal.app` or `192.168.1.50`).
-   - **Subject Alternative Names (SANs)**: Additional domains or IPs (optional).
-   - **Validity Period**: Choose between 90 days, 1 year, or custom (if allowed).
+![Default Generation Modal](/images/guide/certificates-generate-modal-default-metadata-screen.png)
 
-5. **Submit Request**
-   Click **"Submit"**. The system will process your request. 
-   - If **Auto-Approval** is enabled for your role, the certificate is issued immediately.
-   - If **Manual Approval** is required, the status will be `PENDING` until a Manager approves it.
+*   **Common Name (CN)**: The primary domain (e.g., `app.internal`).
+*   **SANs**: Additional domains or IP addresses.
+*   **Key Strength**: Choose the encryption level.
+    ![Key Strength Selector](/images/guide/certificates-generate-modal-key-strength-focused-screen.png)
+    *   **2048-bit**: Industry standard, compatible with all devices.
+    *   **4096-bit**: Higher security, slightly more CPU intensive.
+
+### 3. Customize CSR (Manual Control)
+Toggle **"Manual Control"** if you need to override the default Identity fields (e.g., for a specific branch office or legal entity).
+
+![Manual Control Modal](/images/guide/certificates-generate-modal-manual-control-screen.png)
+
+*   **Organization (O)**: Override the default company name.
+*   **Locality (L) / State (ST)**: Set specific location data.
+*   **Country (C)**: ISO Code.
+
+
+### 4. Submit & Download
+Click **Generate**.
+*   **Private Key**: The system will prompt you to download the `.key` file. **This is the only time it is available.**
+*   **Certificate**: The `.pem` / `.crt` file will be available for download immediately.
+</Steps>
+
+<Callout type="warning" emoji="⚠️">
+  **Security:** Your **Private Key** is shown/downloaded **ONLY ONCE**. Store it securely immediately. If lost, you must revoke and reissue the certificate.
+</Callout>
+
