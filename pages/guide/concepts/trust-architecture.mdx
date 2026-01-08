@@ -1,0 +1,56 @@
+import { Callout, Steps } from 'nextra/components'
+import { GitGraph, Shield, FileX, Network } from 'lucide-react'
+
+# Trust Architecture
+
+While the [Fundamentals](/guide/concepts) page explains *what* PKI is, this page explains *how* the hierarchy is structured to ensure security and scalability.
+
+## The Hierarchy of Authority
+
+TrustLab uses a standard **Three-Tier Architecture** (imulated in some modes) or a Two-Tier architecture to maximize security.
+
+### 1. The Root CA (The Anchor)
+*   **Role**: The ultimate source of trust.
+*   **Behavior**: It signs **Intermediate CAs**. It almost **NEVER** signs end-user certificates directly.
+*   **Security**: If this key is stolen, the entire trust network is compromised. That is why in enterprise environments, the Root CA is often kept offline (air-gapped).
+
+### 2. Intermediate CA (The Manager)
+*   **Role**: The working horse. It is trusted because the Root signed it.
+*   **Behavior**: It signs **Leaf Certificates** (for your servers).
+*   **Benefit**: If an Intermediate CA is compromised, you can revoke it using the Root CA without forcing every user to re-install the Root certificate.
+
+### 3. Leaf Certificate (The Worker)
+*   **Role**: Validates a specific entity (e.g., `trustlab.local`, `api.internal`).
+*   **Behavior**: Cannot sign other certificates. It is valid only for a specific time (e.g., 397 days).
+
+---
+
+## The TLS Handshake (Simplified)
+
+When you access `https://trustlab.local`, what actually happens?
+
+<Steps>
+### 1. Client Hello
+Your browser sends a "Hello" to the server, listing supported encryption methods.
+
+### 2. Server Hello & Certificate
+The server responds with its **Leaf Certificate** AND the **Intermediate Certificate**. It does *not* send the Root.
+
+### 3. Verification (The Chain Walk)
+The browser looks at the Leaf. "Who signed you?" -> "Intermediate A".
+The browser looks at Intermediate A. "Who signed you?" -> "Root CA".
+The browser checks its **Local Trust Store**. "Do I have Root CA?"
+*   **Yes**: <span className="text-green-600 font-bold">Secure Connection Established</span>.
+*   **No**: <span className="text-red-500 font-bold">NET::ERR_CERT_AUTHORITY_INVALID</span>.
+</Steps>
+
+---
+
+## Revocation (CRL & OCSP)
+
+What happens if a private key is stolen *before* the certificate expires? Use Revocation.
+
+*   **CRL (Certificate Revocation List)**: A digital "Blacklist" file signed by the CA. Browsers download this list to check if a certificate is banned.
+*   **OCSP (Online Certificate Status Protocol)**: The browser asks the CA in real-time, "Is this specific serial number still good?".
+
+TrustLab manages these mechanisms internally to ensure that if you delete a compromised certificate, it is effectively effectively untrusted (depending on client support for CRLs).
