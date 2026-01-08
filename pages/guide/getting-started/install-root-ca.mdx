@@ -57,7 +57,7 @@ import { Steps } from 'nextra/components'
 
 If you prefer to install certificates manually, follow these steps for your operating system.
 
-<Tabs items={['Windows', 'macOS', 'Android']}>
+<Tabs items={['Windows', 'macOS', 'Android', 'Linux']}>
   <Tabs.Tab>
     <Steps>
       ### Download the Certificate
@@ -105,5 +105,33 @@ If you prefer to install certificates manually, follow these steps for your oper
       Select "Install anyway" if prompted, then choose the downloaded file.
     </Steps>
   </Tabs.Tab>
+  <Tabs.Tab>
+    <Steps>
+      ### Download
+      Download the **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** file.
+
+      ### Install (Debian/Ubuntu)
+      Copy the file to the CA directory:
+      ```bash
+      sudo cp dydev-its-true.crt /usr/local/share/ca-certificates/trustlab-root.crt
+      ```
+
+      ### Update Store
+      Update the CA store:
+      ```bash
+      sudo update-ca-certificates
+      ```
+      *For RHEL/CentOS, copy to `/etc/pki/ca-trust/source/anchors/` and run `update-ca-trust`.*
+    </Steps>
+  </Tabs.Tab>
 </Tabs>
+
+## Intermediate Certificates
+
+In most cases, installing the Root CA is sufficient for client trust. However, for server configuration or specific use cases, you may need the Intermediate CAs.
+
+| Certificate | Algorithm | Download |
+| :--- | :--- | :--- |
+| **TrustLab Intermediate CA** | RSA 4096 | **[Download (.crt)](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-4096.crt)** |
+| **TrustLab Intermediate CA** | RSA 2048 | **[Download (.crt)](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-2048.crt)** |
 
