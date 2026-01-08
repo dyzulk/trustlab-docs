@@ -1,0 +1,91 @@
+import { Callout, Steps } from 'nextra/components'
+import { Terminal, Code, Server } from 'lucide-react'
+
+# CLI & Language Issues
+
+Even if you installed the Root CA on your operating system, many developer tools and programming languages **ignore the system store** and use their own.
+
+If your code or scripts are failing with certificate errors, check the solutions below.
+
+## 1. cURL & Wget
+
+Standard command-line tools often look for a specific bundle file.
+
+### cURL
+<Callout type="error" emoji={<Terminal className="w-5 h-5" />}>
+  `curl: (60) SSL certificate problem: unable to get local issuer certificate`
+</Callout>
+
+**Solution:**
+Pass the Root CA explicitly:
+```bash
+curl --cacert /path/to/trustlab-root.crt https://your-domain.local
+```
+
+### Wget
+**Solution:**
+```bash
+wget --ca-certificate=/path/to/trustlab-root.crt https://your-domain.local
+```
+
+---
+
+## 2. Node.js / JavaScript
+
+Node.js does not use the System Root CA by default.
+
+<Callout type="error" emoji={<Server className="w-5 h-5" />}>
+  `Error: self signed certificate in certificate chain`
+</Callout>
+
+**Solution (Environment Variable):**
+Set this variable before running your application. It works for most Node.js apps (npm, yarn, custom scripts).
+
+```bash
+export NODE_EXTRA_CA_CERTS="/path/to/trustlab-root.crt"
+node server.js
+```
+
+---
+
+## 3. Python (Requests/Pip)
+
+Python's `requests` library (and `pip`) uses its own certificate bundle (`certifi`), ignoring Windows/macOS/Linux system stores.
+
+<Callout type="error" emoji={<Code className="w-5 h-5" />}>
+  `SSLError(SSLCertVerificationError(1, '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed'))`
+</Callout>
+
+**Solution:**
+Point to your Root CA using an environment variable.
+
+```bash
+export REQUESTS_CA_BUNDLE="/path/to/trustlab-root.crt"
+python script.py
+```
+
+---
+
+## 4. Java Applications
+
+Java uses a proprietary "Keystore" (JKS) and typically **ignores** the Windows Certificate Store.
+
+<Callout type="error" emoji={<Code className="w-5 h-5" />}>
+  `sun.security.validator.ValidatorException: PKIX path building failed`
+</Callout>
+
+**Solution:**
+You must import the TrustLab Root CA into the Java Keystore (cacerts).
+
+<Steps>
+### Locate standard cacerts
+Usually at `$JAVA_HOME/lib/security/cacerts`.
+
+### Import with keytool
+```bash
+keytool -import -trustcacerts -alias trustlab-root \
+  -file trustlab-root.crt \
+  -keystore "$JAVA_HOME/lib/security/cacerts"
+```
+*Default password is typically `changeit`.*
+</Steps>
