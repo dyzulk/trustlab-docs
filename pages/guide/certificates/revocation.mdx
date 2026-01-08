@@ -1,0 +1,23 @@
+# Revocation (Cabut Sertifikat)
+
+Revocation invalidates a certificate before its expiration date. This is critical if a Private Key is compromised.
+
+## When to Revoke?
+- **Key Compromise**: You suspect someone stole your Private Key.
+- **Service Change**: The domain name effectively no longer belongs to the service.
+- **Mistake**: The certificate was issued with incorrect details.
+
+## How to Revoke
+
+1. Open the Certificate Detail page.
+2. Click the **"Revoke"** button (Danger Zone).
+3. Select a **Reason Code**:
+   - `unspecified` (0)
+   - `keyCompromise` (1)
+   - `cACompromise` (2)
+   - `superseded` (4)
+   - `cessationOfOperation` (5)
+4. Confirm the action.
+
+## CRL (Certificate Revocation List)
+Once revoked, the certificate serial number is added to the TrustLab CRL. All clients checking the CRL will immediately reject the certificate.

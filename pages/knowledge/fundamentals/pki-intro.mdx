@@ -1,0 +1,26 @@
+# What is PKI?
+
+**Public Key Infrastructure (PKI)** is a set of roles, policies, hardware, software, and procedures needed to create, manage, distribute, store, and revoke digital certificates.
+
+## Core Concepts
+
+### 1. Asymmetric Encryption
+PKI relies on a pair of keys:
+- **Public Key**: Shared with everyone. Used to encrypt data.
+- **Private Key**: Kept secret. Used to decrypt data and *sign* digital assets.
+
+### 2. The Chain of Trust
+A certificate is only trusted if it is signed by a trusted issuer.
+- **Root CA**: The anchor of trust. It signs itself (Self-Signed). You explicitly trust this on your device.
+- **Intermediate CA**: Signed by Root CA. Used to sign End-Entity certificates for security.
+- **End-Entity (Leaf)**: The certificate used on your Web Server or Email.
+
+TrustLab manages this entire chain for your internal organization.
+
+### 3. Why Internal PKI?
+Using Public CAs (like Let's Encrypt) is great for public websites, but incompatible with:
+- **Intranet IPs** (e.g., `10.0.0.1`).
+- **Internal Domains** (e.g., `.local`, `.corp`).
+- **VPN Services**.
+
+TrustLab fills this gap by acting as your private authority.

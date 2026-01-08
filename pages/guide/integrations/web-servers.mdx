@@ -1,0 +1,52 @@
+# Web Server Configuration
+
+Configuring SSL/TLS on internal web servers is the most common use case for TrustLab.
+
+## Nginx Configuration
+
+Ensure you have downloaded the **PEM** format bundle (contains `.crt` and `.key`).
+
+```nginx
+server {
+    listen 80;
+    server_name internal.app;
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name internal.app;
+
+    # SSL Configuration
+    ssl_certificate     /path/to/internal.app.crt;
+    ssl_certificate_key /path/to/internal.app.key;
+
+    # Recommended Security Settings
+    ssl_protocols TLSv1.2 TLSv1.3;
+    ssl_ciphers HIGH:!aNULL:!MD5;
+    ssl_prefer_server_ciphers on;
+}
+```
+
+## Apache (httpd)
+
+```apache
+<VirtualHost *:443>
+    ServerName internal.app
+    SSLEngine on
+    SSLCertificateFile "/path/to/internal.app.crt"
+    SSLCertificateKeyFile "/path/to/internal.app.key"
+</VirtualHost>
+```
+
+## IIS (Windows Server)
+
+For IIS, you must use the **PFX** format.
+
+1. Open **IIS Manager**.
+2. Select the server node.
+3. Open **Server Certificates**.
+4. Click **Import** in the actions pane.
+5. Select your `.pfx` file and enter the password.
+6. Go to your Site -> **Bindings**.
+7. Add **https** binding and select the imported certificate.

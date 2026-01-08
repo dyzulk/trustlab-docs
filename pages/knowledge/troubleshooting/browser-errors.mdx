@@ -1,0 +1,32 @@
+# Common Browser Errors
+
+When using internal certificates, browsers are very strict. Here are common error codes and what they mean.
+
+## NET::ERR_CERT_AUTHORITY_INVALID hiding
+
+**Cause:**
+The browser does not recognize the Root CA that issued the certificate.
+
+**Solution:**
+You have not installed the TrustLab Root CA on your device.
+-> [Go to Installation Guide](/guide/getting-started/install-root-ca)
+
+## NET::ERR_CERT_COMMON_NAME_INVALID
+
+**Cause:**
+The domain name you are visiting (e.g., `app.local`) does not match the names listed in the certificate.
+
+**Solution:**
+Check the **SANs (Subject Alternative Names)** of the certificate.
+1. Click the "Not Secure" icon in the address bar.
+2. View Certificate.
+3. Check "DNS Names". If the domain is missing, you must **Re-issue** the certificate.
+
+## NET::ERR_CERT_DATE_INVALID
+
+**Cause:**
+The certificate has expired or the system clock is wrong.
+
+**Solution:**
+1. Check your computer's date and time.
+2. If time is correct, the certificate is expired. [Renew the certificate](/guide/certificates/renewal).

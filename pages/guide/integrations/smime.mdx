@@ -1,0 +1,28 @@
+# S/MIME Email Security
+
+Secure/Multipurpose Internet Mail Extensions (S/MIME) allows you to **sign** and **encrypt** internal emails.
+
+- **Signing**: Proves the email actually came from you (prevents spoofing).
+- **Encryption**: Ensures only the intended recipient can read the message.
+
+## Prerequisites
+- A TrustLab certificate with the **S/MIME** profile.
+- Downloaded in **PFX (.p12)** format.
+
+## Outlook (Windows) Setup
+1. Open Outlook. Go to **File > Options > Trust Center**.
+2. Click **Trust Center Settings > Email Security**.
+3. Under "Encrypted Email", click **Settings**.
+4. Click **Choose** for Signing Certificate and select your TrustLab ID.
+5. Click **OK**.
+
+## Thunderbird Setup
+1. Go to **Settings > Privacy & Security**.
+2. Scroll to **Certificates** and click **Manage Certificates**.
+3. Under **"Your Certificates"**, click **Import**.
+4. Select your `.p12` file.
+5. Go back to Account Settings > Security.
+6. Select the certificate for **Digital Signing** and **Encryption**.
+
+> [!TIP]
+> To send encrypted email to a colleague, you must first possess their Public Key (usually by receiving a signed email from them first).

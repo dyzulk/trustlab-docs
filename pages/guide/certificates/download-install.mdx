@@ -1,0 +1,39 @@
+# Download & Formats (PEM, PFX, JKS)
+
+Once your certificate is issued, you can download it in various formats suitable for different servers and applications.
+
+## Available Formats
+
+| Format | Extension | Used For |
+| :--- | :--- | :--- |
+| **PEM (Nginx/Apache)** | `.crt`, `.key` | Standard Linux web servers. You get separate Certificate and Private Key files. |
+| **PFX / PKCS#12** | `.pfx`, `.p12` | IIS (Windows), Microsoft Exchange, Client Certificates (S/MIME). Contains both key and cert. |
+| **JKS (Java)** | `.jks` | Java applications (Tomcat, Spring Boot). |
+
+## How to Download
+
+1. Go to **"My Certificates"** in the dashboard.
+2. Click on the certificate ID or the **"View"** button.
+3. Scroll to the **"Downloads"** section.
+4. Select the format you need and click **Download**.
+
+> [!WARNING]
+> The **Private Key** is generated securely. If you lose it, you cannot recover it. You must revoke and re-issue the certificate.
+
+## Installation Examples
+
+### Nginx (PEM)
+```nginx
+server {
+    listen 443 ssl;
+    server_name internal.app;
+
+    ssl_certificate     /etc/nginx/ssl/internal.app.crt;
+    ssl_certificate_key /etc/nginx/ssl/internal.app.key;
+}
+```
+
+### Windows (PFX)
+1. Double-click the downloaded `.pfx` file.
+2. Follow the "Certificate Import Wizard".
+3. When prompted for a password, enter the password you set during download (or the default export password provided in the UI).

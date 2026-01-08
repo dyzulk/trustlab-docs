@@ -1,0 +1,36 @@
+import { CertificateDownload } from '../../../components/CertificateDownload'
+
+# Installing Root CA
+
+To ensure your browser trusts certificates issued by TrustLab, you must install our Root CA.
+
+<div className="my-8">
+  <CertificateDownload />
+</div>
+
+## Manual Installation Guide
+
+### Windows
+1. Download the Root CA (`.crt`) or use the auto-installer above.
+2. Double-click to open.
+3. Click "Install Certificate".
+4. Select "Local Machine" (Requires Admin).
+5. Choose "Place all certificates in the following store" -> **Trusted Root Certification Authorities**.
+
+### macOS
+1. Download the Root CA.
+2. Open in Keychain Access.
+3. Double-click the certificate.
+4. Expand "Trust" and select "Always Trust".
+
+### Linux (Debian/Ubuntu)
+```bash
+sudo cp trustlab-root.crt /usr/local/share/ca-certificates/
+sudo update-ca-certificates
+```
+
+### Android
+1. Settings > Security > Encryption & Credentials.
+2. Install a certificate > CA Certificate.
+3. Select the downloaded `.crt` or `.der` file.
+

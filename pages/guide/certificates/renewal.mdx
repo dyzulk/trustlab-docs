@@ -1,0 +1,26 @@
+# Renewal Process
+
+Certificates expire to ensure security rotation. TrustLab simplifies the renewal process so you don't experience downtime.
+
+## When to Renew
+You will receive an email notification:
+- **30 days** before expiration.
+- **7 days** before expiration.
+- **1 day** before expiration.
+
+## How to Renew
+
+1. Log in to TrustLab.
+2. Navigate to **"My Certificates"**.
+3. Identify certificates marked with the **"Expiring Soon"** badge.
+4. Click the **"Renew"** button next to the certificate.
+5. Review the details (CN, SANs). You can add or remove SANs at this stage.
+6. Click **Confirm Renewal**.
+
+## What Happens Next?
+- A **new certificate** is generated with a new validity period.
+- The **Private Key** remains the same (if "Reuse Key" was selected) OR a new key is generated (recommended).
+- The old certificate remains valid until its original expiration date (unless revoked).
+
+> [!IMPORTANT]
+> You must **download and install the new certificate** on your server. Renewal **does not** happen automatically on the server side unless you use our ACME integration.

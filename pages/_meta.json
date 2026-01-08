@@ -1,0 +1,18 @@
+{
+    "index": {
+        "title": "Introduction",
+        "type": "page"
+    },
+    "guide": {
+        "title": "User Guide",
+        "type": "page"
+    },
+    "knowledge": {
+        "title": "Knowledge Base",
+        "type": "page"
+    },
+    "policies": {
+        "title": "Policies",
+        "type": "page"
+    }
+}

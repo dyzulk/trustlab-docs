@@ -1,0 +1,31 @@
+# Requesting a New Certificate
+
+TrustLab allows you to request private SSL/TLS certificates for various internal uses.
+
+## Prerequisites
+- You must have an active TrustLab account.
+- You must have the **Root CA** installed on your machine.
+
+## Step-by-Step Guide
+
+1. **Log in to Dashboard**
+   Navigate to the TrustLab Dashboard and login with your credentials.
+
+2. **Navigate to "New Certificate"**
+   Click on the **"New Request"** button in the top navigation bar or the main dashboard card.
+
+3. **Select Certificate Profile**
+   Choose the profile that matches your need:
+   - **Internal Web Server**: For HTTPS on internal tools (e.g., specific IP or `.local` domains).
+   - **User / S/MIME**: For email signing and encryption.
+   - **Code Signing**: For signing scripts and executables.
+
+4. **Fill in Details**
+   - **Common Name (CN)**: The primary domain name or IP address (e.g., `internal.app` or `192.168.1.50`).
+   - **Subject Alternative Names (SANs)**: Additional domains or IPs (optional).
+   - **Validity Period**: Choose between 90 days, 1 year, or custom (if allowed).
+
+5. **Submit Request**
+   Click **"Submit"**. The system will process your request. 
+   - If **Auto-Approval** is enabled for your role, the certificate is issued immediately.
+   - If **Manual Approval** is required, the status will be `PENDING` until a Manager approves it.
