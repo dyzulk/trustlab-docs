@@ -1,0 +1,16 @@
+# Endpoints
+
+## Certificates
+
+### List Certificates
+`GET /certificates`
+
+### Request Certificate
+`POST /certificates`
+
+```json
+{
+  "csr": "-----BEGIN CERTIFICATE REQUEST-----...",
+  "validity_days": 365
+}
+```
