@@ -1,52 +1,60 @@
 import { Callout, Cards, Card } from 'nextra/components'
-import { ShieldCheck, ShieldAlert, BadgeCheck, Lock } from 'lucide-react'
+import { ShieldCheck, ShieldAlert, BadgeCheck, Lock, Key, Link, CheckCircle2, XCircle } from 'lucide-react'
 
 # PKI Fundamentals & Trust Context
 
-Understanding the difference between **Private PKI** (TrustLab) and **Public PKI** (Let's Encrypt, DigiCert) is critical for using SSL/TLS effectively and safely.
+**Public Key Infrastructure (PKI)** is the framework that allows secure communication over the internet. It relies on cryptographic keys and a chain of trust to verify identities.
+
+## Core Concepts
+
+Understanding these two mechanisms is essential to understanding how TrustLab works.
+
+### 1. Asymmetric Encryption
+Secure communication relies on a pair of keys:
+*   <Key className="inline w-4 h-4 mr-1"/> **Public Key**: Shared with everyone. Used to **encrypt** data.
+*   <Lock className="inline w-4 h-4 mr-1"/> **Private Key**: Kept secret. Used to **decrypt** data and **sign** digital assets.
+
+### 2. The Chain of Trust
+A certificate is only trusted if it is signed by a known authority. This forms a chain:
+*   **Root CA**: The trusted anchor. It signs itself. You must install this on your device to trust the chain.
+*   **Intermediate CA**: Signed by the Root CA. Used to sign day-to-day certificates for security.
+*   **Leaf Certificate**: The final certificate used on your Web Server or Email.
+
+---
 
 ## The Two Lanes of Trust
 
-The internet security model is built on two distinct "lanes" of trust. Mixing them up causes errors, but using them correctly provides **Military-Grade Security**.
+The internet security model is built on two distinct "lanes". Mixing them up causes browser errors, but using them correctly provides **Military-Grade Security**.
 
 <Cards>
-  <Card icon={<ShieldCheck />} title="Public Lane (Global)" href="#1-public-pki" arrow />
-  <Card icon={<Lock />} title="Private Lane (Internal)" href="#2-private-pki-trustlab" arrow />
+  <Card icon={<ShieldCheck />} title="Public Lane (Global)" href="#public-pki" arrow />
+  <Card icon={<Lock />} title="Private Lane (Internal)" href="#private-pki-trustlab" arrow />
 </Cards>
 
-### 1. Public PKI
+### Public PKI
 *   **Issuer**: Let's Encrypt, DigiCert, Google Trust Services.
 *   **Trust Model**: Pre-installed in every browser/OS (Chrome, Windows, iOS) by default.
-*   **Verification**: Requires you to own a public domain (e.g., `google.com`).
-*   **Limitation**: **Cannot** issue certificates for:
-    *   Private IP Addresses (e.g., `192.168.1.50`).
-    *   Internal Domain Names (e.g., `company.local`, `dev.internal`).
-    *   Intranet servers behind a firewall.
+*   **Limitation**: **Cannot** issue certificates for Private IPs (`192.168.x.x`) or Internal Domains (`.local`, `.lan`).
 
-### 2. Private PKI (TrustLab)
+### Private PKI (TrustLab)
 *   **Issuer**: TrustLab Root CA (Your Organization).
-*   **Trust Model**: Trusted **ONLY** by devices that have installed your Root CA.
-*   **Strength**: Uses the **exact same math** (RSA-2048/4096, SHA-256) as Public CAs.
-*   **Superpower**: Can secure **ANYTHING**:
-    *   Localhost (`localhost`).
-    *   Database Servers (`10.0.0.5`).
-    *   Development Environments.
-    *   Internal APIs.
+*   **Trust Model**: Trusted **ONLY** by devices that have explicitly installed your Root CA.
+*   **Superpower**: Can secure **ANYTHING** internal (Localhost, Database Servers, IoT).
 
 ---
 
 ## Why "Military Grade"?
 
-TrustLab utilizes **OpenSSL**, the same cryptographic core used by majority of the world's secure servers, banks, and military networks.
+TrustLab utilizes **OpenSSL**, the same cryptographic core used by the world's highly secure networks.
 
 | Feature | TrustLab (Private) | Public CA (Paid) |
 | :--- | :--- | :--- |
 | **Encryption** | RSA-2048 / RSA-4096 | RSA-2048 / RSA-4096 |
 | **Signature** | SHA-256 | SHA-256 |
 | **Protocol** | TLS 1.2 / 1.3 | TLS 1.2 / 1.3 |
-| **Global Trust** | ❌ (Manual Install Required) | ✅ (Pre-installed) |
-| **Internal IPs** | ✅ Supported | ❌ Forbidden |
-| **Cost** | **Free** | $400+/month (for Private CA) |
+| **Global Trust** | <XCircle className="inline w-4 h-4 text-red-500"/> (Manual Install) | <CheckCircle2 className="inline w-4 h-4 text-green-500"/> (Pre-installed) |
+| **Internal IPs** | <CheckCircle2 className="inline w-4 h-4 text-green-500"/> Supported | <XCircle className="inline w-4 h-4 text-red-500"/> Forbidden |
+| **Cost** | **Free** | $400+/month (Private CA) |
 
 ## Appropriate Use Cases
 
@@ -56,16 +64,15 @@ TrustLab utilizes **OpenSSL**, the same cryptographic core used by majority of t
   Use **Public CAs** for anything the Public Internet MUST access.
 </Callout>
 
-### ✅ Perfect For (Green Lane)
+### <CheckCircle2 className="inline w-5 h-5 text-green-500 mr-2"/> Perfect For (Green Lane)
 *   **Internal Tools**: Admin Panels, HR Portals, Dashboards.
 *   **Development**: Testing HTTPS on `localhost` or `dev.local`.
-*   **Databases**: Securing connection to MySQL/Postgres/Mongo.
-*   **IoT Devices**: Securing communication between sensors and local hubs.
-*   **S/MIME**: Encrypting email between employees.
+*   **Databases**: Securing connections to MySQL/Postgres/Mongo.
+*   **S/MIME**: Encrypting email between internal employees.
 
-### ❌ Do Not Use For (Red Lane)
+### <XCircle className="inline w-5 h-5 text-red-500 mr-2"/> Do Not Use For (Red Lane)
 *   **Public E-Commerce**: Your customer's browser will show a "Not Secure" warning.
-*   **Public Blogs/Websites**: Random visitors will not have your Root CA installed.
+*   **Public Blogs/Websites**: Random visitors do not have your Root CA installed.
 
 ## The "Trust Split" Myth
 
