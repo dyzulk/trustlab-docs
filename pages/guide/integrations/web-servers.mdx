@@ -1,52 +1,76 @@
+import { Tabs, Callout } from 'nextra/components'
+import { Server, Globe, Shield } from 'lucide-react'
+
 # Web Server Configuration
 
-Configuring SSL/TLS on internal web servers is the most common use case for TrustLab.
+To enable HTTPS on your internal services, you need to configure your web server to use the certificates issued by TrustLab.
 
-## Nginx Configuration
+<Callout type="info" emoji={<Shield className="w-5 h-5" />}>
+  **Prerequisite:** Ensure you have downloaded the **PEM Bundle** (for Linux) or **PFX** (for Windows) as described in the [Download Guide](/guide/certificates/download-install).
+</Callout>
 
-Ensure you have downloaded the **PEM** format bundle (contains `.crt` and `.key`).
+## Configuration Examples
 
-```nginx
-server {
-    listen 80;
-    server_name internal.app;
-    return 301 https://$host$request_uri;
-}
+Select your web server environment below:
 
-server {
-    listen 443 ssl http2;
-    server_name internal.app;
+<Tabs items={['Nginx', 'Apache (httpd)', 'IIS (Windows)']}>
+  <Tabs.Tab>
+    ### Nginx Setup
+    Target File: `/etc/nginx/sites-available/default` or `internal.app.conf`
+    
+    ```nginx
+    server {
+        listen 80;
+        server_name internal.app;
+        return 301 https://$host$request_uri;
+    }
 
-    # SSL Configuration
-    ssl_certificate     /path/to/internal.app.crt;
-    ssl_certificate_key /path/to/internal.app.key;
+    server {
+        listen 443 ssl http2;
+        server_name internal.app;
 
-    # Recommended Security Settings
-    ssl_protocols TLSv1.2 TLSv1.3;
-    ssl_ciphers HIGH:!aNULL:!MD5;
-    ssl_prefer_server_ciphers on;
-}
-```
+        # SSL Configuration
+        ssl_certificate     /etc/ssl/trustlab/internal.app.crt;
+        ssl_certificate_key /etc/ssl/trustlab/internal.app.key;
 
-## Apache (httpd)
+        # Recommended Security
+        ssl_protocols TLSv1.2 TLSv1.3;
+        ssl_ciphers HIGH:!aNULL:!MD5;
+        ssl_prefer_server_ciphers on;
+    }
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ### Apache / HTTPD Setup
+    Target File: `/etc/httpd/conf.d/ssl.conf` or VHost file.
 
-```apache
-<VirtualHost *:443>
-    ServerName internal.app
-    SSLEngine on
-    SSLCertificateFile "/path/to/internal.app.crt"
-    SSLCertificateKeyFile "/path/to/internal.app.key"
-</VirtualHost>
-```
+    ```apache
+    <VirtualHost *:443>
+        ServerName internal.app
+        DocumentRoot /var/www/html/internal
 
-## IIS (Windows Server)
-
-For IIS, you must use the **PFX** format.
-
-1. Open **IIS Manager**.
-2. Select the server node.
-3. Open **Server Certificates**.
-4. Click **Import** in the actions pane.
-5. Select your `.pfx` file and enter the password.
-6. Go to your Site -> **Bindings**.
-7. Add **https** binding and select the imported certificate.
+        SSLEngine on
+        SSLCertificateFile      "/path/to/internal.app.crt"
+        SSLCertificateKeyFile   "/path/to/internal.app.key"
+        
+        # Best Practice
+        SSLProtocol all -SSLv3 -TLSv1 -TLSv1.1
+    </VirtualHost>
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ### IIS (Internet Information Services)
+    Requires the **.pfx** file format.
+    
+    1.  **Import Certificate**:
+        *   Open **IIS Manager** > Click Server Node > **Server Certificates**.
+        *   Click **Import...** (Actions pane).
+        *   Select your `.pfx` file and enter the password.
+    
+    2.  **Bind to Site**:
+        *   Go to **Sites** > Select your site (e.g., Default Web Site).
+        *   Click **Bindings...** > **Add...**
+        *   Type: `https` | Port: `443`.
+        *   **SSL Certificate**: Select the certificate you just imported.
+  </Tabs.Tab>
+</Tabs>

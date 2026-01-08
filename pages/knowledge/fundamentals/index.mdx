@@ -1,0 +1,76 @@
+import { Callout, Cards, Card } from 'nextra/components'
+import { ShieldCheck, ShieldAlert, BadgeCheck, Lock } from 'lucide-react'
+
+# PKI Fundamentals & Trust Context
+
+Understanding the difference between **Private PKI** (TrustLab) and **Public PKI** (Let's Encrypt, DigiCert) is critical for using SSL/TLS effectively and safely.
+
+## The Two Lanes of Trust
+
+The internet security model is built on two distinct "lanes" of trust. Mixing them up causes errors, but using them correctly provides **Military-Grade Security**.
+
+<Cards>
+  <Card icon={<ShieldCheck />} title="Public Lane (Global)" href="#1-public-pki" arrow />
+  <Card icon={<Lock />} title="Private Lane (Internal)" href="#2-private-pki-trustlab" arrow />
+</Cards>
+
+### 1. Public PKI
+*   **Issuer**: Let's Encrypt, DigiCert, Google Trust Services.
+*   **Trust Model**: Pre-installed in every browser/OS (Chrome, Windows, iOS) by default.
+*   **Verification**: Requires you to own a public domain (e.g., `google.com`).
+*   **Limitation**: **Cannot** issue certificates for:
+    *   Private IP Addresses (e.g., `192.168.1.50`).
+    *   Internal Domain Names (e.g., `company.local`, `dev.internal`).
+    *   Intranet servers behind a firewall.
+
+### 2. Private PKI (TrustLab)
+*   **Issuer**: TrustLab Root CA (Your Organization).
+*   **Trust Model**: Trusted **ONLY** by devices that have installed your Root CA.
+*   **Strength**: Uses the **exact same math** (RSA-2048/4096, SHA-256) as Public CAs.
+*   **Superpower**: Can secure **ANYTHING**:
+    *   Localhost (`localhost`).
+    *   Database Servers (`10.0.0.5`).
+    *   Development Environments.
+    *   Internal APIs.
+
+---
+
+## Why "Military Grade"?
+
+TrustLab utilizes **OpenSSL**, the same cryptographic core used by majority of the world's secure servers, banks, and military networks.
+
+| Feature | TrustLab (Private) | Public CA (Paid) |
+| :--- | :--- | :--- |
+| **Encryption** | RSA-2048 / RSA-4096 | RSA-2048 / RSA-4096 |
+| **Signature** | SHA-256 | SHA-256 |
+| **Protocol** | TLS 1.2 / 1.3 | TLS 1.2 / 1.3 |
+| **Global Trust** | ❌ (Manual Install Required) | ✅ (Pre-installed) |
+| **Internal IPs** | ✅ Supported | ❌ Forbidden |
+| **Cost** | **Free** | $400+/month (for Private CA) |
+
+## Appropriate Use Cases
+
+<Callout type="info" emoji={<BadgeCheck className="w-5 h-5" />}>
+  **The Golden Rule:**
+  Use **TrustLab** for anything the Public Internet CANNOT access.
+  Use **Public CAs** for anything the Public Internet MUST access.
+</Callout>
+
+### ✅ Perfect For (Green Lane)
+*   **Internal Tools**: Admin Panels, HR Portals, Dashboards.
+*   **Development**: Testing HTTPS on `localhost` or `dev.local`.
+*   **Databases**: Securing connection to MySQL/Postgres/Mongo.
+*   **IoT Devices**: Securing communication between sensors and local hubs.
+*   **S/MIME**: Encrypting email between employees.
+
+### ❌ Do Not Use For (Red Lane)
+*   **Public E-Commerce**: Your customer's browser will show a "Not Secure" warning.
+*   **Public Blogs/Websites**: Random visitors will not have your Root CA installed.
+
+## The "Trust Split" Myth
+
+There is **no conflict** between having TrustLab installed and visiting public websites.
+*   When you visit `google.com`, your browser uses the **Public Lane**.
+*   When you visit `intranet.corp`, your browser sees the TrustLab signature and uses the **Private Lane**.
+
+They coexist peacefully, providing comprehensive security for your entire digital life.
