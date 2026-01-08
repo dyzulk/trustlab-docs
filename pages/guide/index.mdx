@@ -1,8 +1,29 @@
-# User Guide
+import { Cards, Card } from 'nextra/components'
+import { BookOpen, ShieldCheck, Server, Mail, AlertTriangle, HardDriveDownload, Rocket } from 'lucide-react'
 
-Welcome to the TrustLab User Guide. Here you will find step-by-step instructions on how to use our services.
+# TrustLab Documentation
 
-## Getting Started
+Welcome to the **TrustLab User Guide**.
+TrustLab is a private Certificate Authority (CA) designed to secure your internal infrastructure (Intranet, APIs, IoT, Databases) with SSL/TLS certificates.
 
-- [Install Root CA](/guide/getting-started/install-root-ca)
-- [Access Dashboard](/guide/getting-started/access-dashboard)
+## Quick Start
+
+<Cards>
+  <Card icon={<Rocket />} title="Install Root CA" href="/guide/getting-started/install-root-ca" arrow />
+  <Card icon={<HardDriveDownload />} title="Generate Certificate" href="/guide/certificates/request-new" arrow />
+  <Card icon={<ShieldCheck />} title="Core Concepts (PKI)" href="/guide/concepts" arrow />
+</Cards>
+
+## Guide Structure
+
+This documentation is organized as follows:
+
+*   [**Getting Started**](/guide/getting-started/install-root-ca): Setup Root CA and access the dashboard.
+*   [**Core Concepts**](/guide/concepts): Understand the "Two Lanes of Trust" (Public vs Private PKI).
+*   [**Certificate Operations**](/guide/certificates/request-new): Request, Download, Renew, and Revoke certificates.
+*   [**Integrations**](/guide/integrations/web-servers): Configure Nginx, IIS, and S/MIME.
+*   [**Troubleshooting**](/guide/troubleshooting/browser-errors): Resolve common browser errors like `NET::ERR_CERT_AUTHORITY_INVALID`.
+
+## Why TrustLab?
+
+TrustLab solves the "Not Secure" warnings on internal networks by providing a centralized, managed PKI that acts just like a Public CA (Let's Encrypt), but for your **Private Network**.

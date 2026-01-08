@@ -8,4 +8,13 @@ module.exports = withNextra({
   images: {
     unoptimized: true,
   },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/guide',
+        permanent: true,
+      },
+    ]
+  },
 })

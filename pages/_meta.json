@@ -1,10 +1,6 @@
 {
-    "index": {
-        "title": "Introduction",
-        "type": "page"
-    },
     "guide": {
-        "title": "User Guide",
+        "title": "Documentation",
         "type": "page"
     }
 }
