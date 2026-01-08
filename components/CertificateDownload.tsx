@@ -64,7 +64,6 @@ export function CertificateDownload() {
                             icon={getIcon('root')}
                             title={cert.name}
                             href={getDownloadLink(cert) || '#'}
-                            target="_blank"
                         />
                     ))}
                 </Cards>
@@ -79,7 +78,6 @@ export function CertificateDownload() {
                             icon={getIcon('intermediate')}
                             title={cert.name}
                             href={getDownloadLink(cert) || '#'}
-                            target="_blank"
                         />
                     ))}
                 </Cards>
