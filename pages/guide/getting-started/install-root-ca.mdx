@@ -8,29 +8,102 @@ To ensure your browser trusts certificates issued by TrustLab, you must install 
   <CertificateDownload />
 </div>
 
-## Manual Installation Guide
+## Quick Installation (Recommended)
+
+Instantly install all TrustLab Root & Intermediate certificates using our automated scripts.
+
+import { Tabs } from 'nextra/components'
+
+### Linux / Server (CLI)
+
+Select your distribution to get the optimized installation command:
+
+<Tabs items={['Debian/Ubuntu', 'RHEL/CentOS', 'Arch Linux', 'Universal']}>
+  <Tabs.Tab>
+    ```bash
+    sudo apt update && sudo apt install -y curl && curl -sL https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.sh | sudo bash
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash
+    (sudo yum install -y curl || sudo dnf install -y curl) && curl -sL https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.sh | sudo bash
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash
+    sudo pacman -Sy --noconfirm curl && curl -sL https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.sh | sudo bash
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash
+    curl -sL https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.sh | sudo bash
+    ```
+  </Tabs.Tab>
+</Tabs>
 
 ### Windows
-1. Download the Root CA (`.crt`) or use the auto-installer above.
-2. Double-click to open.
-3. Click "Install Certificate".
-4. Select "Local Machine" (Requires Admin).
-5. Choose "Place all certificates in the following store" -> **Trusted Root Certification Authorities**.
+[Download Auto-Installer (.bat)](https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.bat)  
+*Right-click and Run as Administrator explicitly.*
+
+### macOS / iOS
+[Download Configuration Profile (.mobileconfig)](https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.mobileconfig)  
+*Go to System Settings > Privacy & Security > Profiles to install after downloading.*
+
+---
+
+import { Steps } from 'nextra/components'
+
+## Manual Installation Guide
+
+If you prefer to install certificates manually, follow these steps for your operating system.
+
+### Windows
+
+<Steps>
+### Download the Certificate
+Download the **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/trustlab-root.crt)** file.
+
+### Open Certificate
+Double-click the downloaded `trustlab-root.crt` file. Click **"Install Certificate"**.
+
+### Select Store Location
+Select **"Local Machine"** (Requires Admin rights) and click Next.
+
+### Browse Certificate Store
+Choose **"Place all certificates in the following store"** and click **Browse**.
+Select **Trusted Root Certification Authorities**.
+
+### Finish
+Click Next and Finish. The certificate is now installed system-wide.
+</Steps>
 
 ### macOS
-1. Download the Root CA.
-2. Open in Keychain Access.
-3. Double-click the certificate.
-4. Expand "Trust" and select "Always Trust".
 
-### Linux (Debian/Ubuntu)
-```bash
-sudo cp trustlab-root.crt /usr/local/share/ca-certificates/
-sudo update-ca-certificates
-```
+<Steps>
+### Download
+Download the **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/trustlab-root.crt)** file.
+
+### Add to Keychain
+Double-click the file to open **Keychain Access**.
+Select the **System** keychain.
+
+### Trust the Certificate
+Double-click the "TrustLab Root CA" in the list.
+Expand the **Trust** section.
+Change "When using this certificate" to **Always Trust**.
+</Steps>
 
 ### Android
-1. Settings > Security > Encryption & Credentials.
-2. Install a certificate > CA Certificate.
-3. Select the downloaded `.crt` or `.der` file.
+
+<Steps>
+### Download
+Download the **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/trustlab-root.crt)** or **[DER Format](https://cdn.trustlab.dyzulk.com/ca/trustlab-root.der)**.
+
+### Install via Settings
+Go to **Settings** > **Security** > **Encryption & Credentials**.
+Tap **Install a certificate** > **CA Certificate**.
+
+### Select File
+Select "Install anyway" if prompted, then choose the downloaded file.
+</Steps>
 
