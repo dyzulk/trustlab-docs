@@ -57,53 +57,53 @@ import { Steps } from 'nextra/components'
 
 If you prefer to install certificates manually, follow these steps for your operating system.
 
-### Windows
+<Tabs items={['Windows', 'macOS', 'Android']}>
+  <Tabs.Tab>
+    <Steps>
+      ### Download the Certificate
+      Download the **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** file.
 
-<Steps>
-### Download the Certificate
-Download the **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** file.
+      ### Open Certificate
+      Double-click the downloaded `dydev-its-true.crt` file. Click **"Install Certificate"**.
 
-### Open Certificate
-Double-click the downloaded `dydev-its-true.crt` file. Click **"Install Certificate"**.
+      ### Select Store Location
+      Select **"Local Machine"** (Requires Admin rights) and click Next.
 
-### Select Store Location
-Select **"Local Machine"** (Requires Admin rights) and click Next.
+      ### Browse Certificate Store
+      Choose **"Place all certificates in the following store"** and click **Browse**.
+      Select **Trusted Root Certification Authorities**.
 
-### Browse Certificate Store
-Choose **"Place all certificates in the following store"** and click **Browse**.
-Select **Trusted Root Certification Authorities**.
+      ### Finish
+      Click Next and Finish. The certificate is now installed system-wide.
+    </Steps>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Steps>
+      ### Download
+      Download the **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** file.
 
-### Finish
-Click Next and Finish. The certificate is now installed system-wide.
-</Steps>
+      ### Add to Keychain
+      Double-click the file to open **Keychain Access**.
+      Select the **System** keychain.
 
-### macOS
+      ### Trust the Certificate
+      Double-click the "DyDev Its True" (Root CA) in the list.
+      Expand the **Trust** section.
+      Change "When using this certificate" to **Always Trust**.
+    </Steps>
+  </Tabs.Tab>
+  <Tabs.Tab>
+    <Steps>
+      ### Download
+      Download the **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** or **[DER Format](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.der)**.
 
-<Steps>
-### Download
-Download the **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** file.
+      ### Install via Settings
+      Go to **Settings** > **Security** > **Encryption & Credentials**.
+      Tap **Install a certificate** > **CA Certificate**.
 
-### Add to Keychain
-Double-click the file to open **Keychain Access**.
-Select the **System** keychain.
-
-### Trust the Certificate
-Double-click the "DyDev Its True" (Root CA) in the list.
-Expand the **Trust** section.
-Change "When using this certificate" to **Always Trust**.
-</Steps>
-
-### Android
-
-<Steps>
-### Download
-Download the **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** or **[DER Format](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.der)**.
-
-### Install via Settings
-Go to **Settings** > **Security** > **Encryption & Credentials**.
-Tap **Install a certificate** > **CA Certificate**.
-
-### Select File
-Select "Install anyway" if prompted, then choose the downloaded file.
-</Steps>
+      ### Select File
+      Select "Install anyway" if prompted, then choose the downloaded file.
+    </Steps>
+  </Tabs.Tab>
+</Tabs>
 
