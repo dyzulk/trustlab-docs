@@ -1,4 +1,5 @@
 import React from 'react'
+import { useRouter } from 'next/router'
 import { DocsThemeConfig } from 'nextra-theme-docs'
 
 const config: DocsThemeConfig = {
@@ -22,6 +23,17 @@ const config: DocsThemeConfig = {
     )
   },
   docsRepositoryBase: 'https://github.com/dyzulk/trustlab-docs/tree/main',
+  useNextSeoProps() {
+    const { asPath } = useRouter()
+    if (asPath === '/') {
+      return {
+        titleTemplate: 'TrustLab - Private Certificate Authority'
+      }
+    }
+    return {
+      titleTemplate: '%s – TrustLab Docs'
+    }
+  },
   head: (
     <>
       <link rel="icon" href="/favicon.ico" />

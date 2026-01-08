@@ -1,4 +1,3 @@
 {
-    "browser-errors": "NET::ERR_CERT Errors",
-    "missing-root": "System Doesn't Trust CA"
+    "browser-errors": "Common Browser Errors"
 }
