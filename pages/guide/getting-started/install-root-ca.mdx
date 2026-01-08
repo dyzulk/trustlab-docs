@@ -108,7 +108,10 @@ If you prefer to install certificates manually, follow these steps for your oper
   <Tabs.Tab>
     <Steps>
       ### Download
-      Download the **[Root CA (.crt)](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** file.
+      Download the certificate using `curl`:
+      ```bash
+      curl -LO https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt
+      ```
 
       ### Install (Debian/Ubuntu)
       Copy the file to the CA directory:
@@ -128,7 +131,16 @@ If you prefer to install certificates manually, follow these steps for your oper
 
 ## Intermediate Certificates
 
-In most cases, installing the Root CA is sufficient for client trust. However, for server configuration or specific use cases, you may need the Intermediate CAs.
+Intermediate certificates are used to sign end-entity certificates (servers, clients). **Clients typically do not need to install these manually**, as servers should provide them during the handshake.
+
+**For Server Administrators:**
+To configure your web server (Nginx, Apache, IIS) with the full chain, please refer to the **[Web Server Configuration](/guide/integrations/web-servers)** guide.
+
+**Manual Installation (If Required):**
+If you must install them manually (e.g., for offline chain validation):
+*   **Windows**: Follow the Root CA guide, but choose **Intermediate Certification Authorities** as the certificate store.
+*   **macOS**: Add to **System** keychain.
+*   **Linux**: Place in the same CA directory as the Root.
 
 | Certificate | Algorithm | Download |
 | :--- | :--- | :--- |
