@@ -1,0 +1,43 @@
+import { Callout, Cards, Card } from 'nextra/components'
+import { AlertTriangle, Globe, Calendar, XCircle, HelpCircle } from 'lucide-react'
+
+# Common Browser Errors
+
+When using internal certificates, browsers are very strict. Below are the most common error codes and how to resolve them.
+
+### `NET::ERR_CERT_AUTHORITY_INVALID`
+
+<Callout type="error" emoji={<AlertTriangle className="w-5 h-5" />}>
+  **The Logic:** The browser simply **does not know** the "TrustLab Root CA" that signed your website's certificate, so it assumes it's fake.
+</Callout>
+
+**Solution:**
+You have not installed the Root CA on your device yet.
+*   [**Install Root CA Guide**](/guide/getting-started/install-root-ca)
+
+---
+
+### `NET::ERR_CERT_COMMON_NAME_INVALID`
+
+<Callout type="warning" emoji={<Globe className="w-5 h-5" />}>
+  **The Logic:** You are visiting `app.local`, but the certificate was only issued for `api.local`. The names **do not match**.
+</Callout>
+
+**Solution:**
+The domain is missing from the certificate's **SANs (Subject Alternative Names)**.
+1.  Click the **"Not Secure"** icon > **Certificate**.
+2.  Check the **DNS Name** or SAN field.
+3.  If missing, you must **[Generate a New Certificate](/guide/certificates/request-new)** that includes the correct domain.
+
+---
+
+### `NET::ERR_CERT_DATE_INVALID`
+
+<Callout type="info" emoji={<Calendar className="w-5 h-5" />}>
+  **The Logic:** The certificate has expired, OR your computer's clock is set to the wrong date (past/future).
+</Callout>
+
+**Solution:**
+1.  Check your system clock first.
+2.  If the clock is correct, the certificate is truly expired.
+3.  **[Renew the Certificate](/guide/certificates/renewal)** immediately.

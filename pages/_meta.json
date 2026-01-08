@@ -6,9 +6,5 @@
     "guide": {
         "title": "User Guide",
         "type": "page"
-    },
-    "knowledge": {
-        "title": "Knowledge Base",
-        "type": "page"
     }
 }
