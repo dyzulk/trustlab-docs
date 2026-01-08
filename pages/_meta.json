@@ -10,9 +10,5 @@
     "knowledge": {
         "title": "Knowledge Base",
         "type": "page"
-    },
-    "policies": {
-        "title": "Policies",
-        "type": "page"
     }
 }

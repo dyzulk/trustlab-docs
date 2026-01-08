@@ -1,5 +1,4 @@
 {
     "smime": "S/MIME for Email",
-    "web-servers": "Web Servers (Nginx/IIS)",
-    "code-signing": "Code Signing"
+    "web-servers": "Web Servers (Nginx/IIS)"
 }
