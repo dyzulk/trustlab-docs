@@ -75,6 +75,7 @@ If you need to install specific certificates individually (e.g. only Root, or sp
       | :--- | :--- | :--- |
       | **Root CA** | **[dydev-its-true.crt](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** | **[Profile (.mobileconfig)](https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-dydev-its-true.mobileconfig)** |
       | **Intermediate (4096)** | [4096.crt](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-4096.crt) | [Profile (.mobileconfig)](https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-trustlab-intermediate-ca-4096.mobileconfig) |
+      | **Intermediate (2048)** | [2048.crt](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-2048.crt) | [Profile (.mobileconfig)](https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-trustlab-intermediate-ca-2048.mobileconfig) |
 
       ### Install
       *   **Profile**: Double-click `.mobileconfig` -> Go to System Settings -> Privacy & Security -> Profiles -> Install.
@@ -88,6 +89,8 @@ If you need to install specific certificates individually (e.g. only Root, or sp
       | Certificate | Raw File | DER Format |
       | :--- | :--- | :--- |
       | **Root CA** | **[dydev-its-true.crt](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt)** | **[dydev-its-true.der](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.der)** |
+      | **Intermediate (4096)** | [4096.crt](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-4096.crt) | [4096.der](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-4096.der) |
+      | **Intermediate (2048)** | [2048.crt](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-2048.crt) | [2048.der](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-2048.der) |
 
       ### Install
       Settings -> Security -> Encryption & Credentials -> Install a certificate -> CA Certificate.
@@ -101,7 +104,8 @@ If you need to install specific certificates individually (e.g. only Root, or sp
       | Certificate | Raw File | One-Liner Installer |
       | :--- | :--- | :--- |
       | **Root CA** | [dydev-its-true.crt](https://cdn.trustlab.dyzulk.com/ca/dydev-its-true.crt) | `curl -sL https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-dydev-its-true.sh | sudo bash` |
-      | **Intermediate** | [4096.crt](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-4096.crt) | `curl -sL https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-trustlab-intermediate-ca-4096.sh | sudo bash` |
+      | **Intermediate (4096)** | [4096.crt](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-4096.crt) | `curl -sL https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-trustlab-intermediate-ca-4096.sh | sudo bash` |
+      | **Intermediate (2048)** | [2048.crt](https://cdn.trustlab.dyzulk.com/ca/trustlab-intermediate-ca-2048.crt) | `curl -sL https://cdn.trustlab.dyzulk.com/ca/installers/trustlab-trustlab-intermediate-ca-2048.sh | sudo bash` |
 
       ### Manual Place
       If using raw file:
