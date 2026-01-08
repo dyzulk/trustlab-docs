@@ -27,7 +27,7 @@ export function LandingPage() {
           </p>
           
           <div className="flex flex-wrap gap-4 mt-8">
-            <Link href="/guide/getting-started/install-root-ca" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all hover:scale-105 shadow-lg shadow-blue-500/20">
+            <Link href="https://trustlab.dyzulk.com/register" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all hover:scale-105 shadow-lg shadow-blue-500/20">
               Get Started <ArrowRight className="w-4 h-4" />
             </Link>
             <Link href="/guide/certificates/request-new" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700 font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-all">
