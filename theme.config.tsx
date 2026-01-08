@@ -15,7 +15,7 @@ const config: DocsThemeConfig = {
     link: 'https://github.com/dyzulk/trustlab-docs',
   },
   chat: {
-    link: 'https://trustlab.dyzulk.com/dashboard/',
+    link: 'https://trustlab.dyzulk.com/dashboard',
     icon: (
       <span className="text-sm font-semibold bg-blue-600/10 text-blue-600 dark:text-blue-400 px-3 py-1.5 rounded-full hover:bg-blue-600/20 transition-colors">
         Go to Dashboard →
