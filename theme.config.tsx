@@ -26,17 +26,42 @@ const config: DocsThemeConfig = {
   docsRepositoryBase: 'https://github.com/dyzulk/trustlab-docs/tree/main',
   useNextSeoProps() {
     const { asPath } = useRouter()
+    const description = 'TrustLab - Private Certificate Authority'
+    const siteName = 'TrustLab Docs'
+    
+    let titleTemplate = '%s – ' + siteName
     if (asPath.includes('/index') || asPath.endsWith('/en/') || asPath.endsWith('/id/')) {
-      return {
-        titleTemplate: 'TrustLab - Private Certificate Authority'
-      }
+      titleTemplate = 'TrustLab - Private Certificate Authority'
     }
+
     return {
-      titleTemplate: '%s – TrustLab Docs'
+      titleTemplate,
+      description,
+      openGraph: {
+        type: 'website',
+        locale: 'en_US',
+        url: `https://docs.trustlab.dyzulk.com${asPath}`,
+        siteName: siteName,
+        images: [
+          {
+            url: 'https://docs.trustlab.dyzulk.com/images/logo-outlined.png',
+            width: 1200,
+            height: 630,
+            alt: 'TrustLab Logo',
+          },
+        ],
+      },
+      twitter: {
+        handle: '@trustlab',
+        site: '@trustlab',
+        cardType: 'summary_large_image',
+      },
     }
   },
   head: (
     <>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="apple-mobile-web-app-title" content="TrustLab" />
       <link rel="icon" href="/favicon.ico" />
     </>
   ),
