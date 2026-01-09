@@ -1,15 +1,10 @@
 {
-    "index": {
-        "title": "Home",
+    "en": {
         "type": "page",
         "display": "hidden"
     },
-    "guide": {
-        "title": "User Guide",
-        "type": "page"
-    },
-    "developer": {
-        "title": "Developer API",
-        "type": "page"
+    "id": {
+        "type": "page",
+        "display": "hidden"
     }
 }

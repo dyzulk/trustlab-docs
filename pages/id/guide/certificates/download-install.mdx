@@ -1,0 +1,43 @@
+# Unduh & Format (PEM, PFX, JKS)
+
+Setelah sertifikat Anda diterbitkan, Anda dapat mengunduhnya dalam berbagai format yang sesuai untuk server dan aplikasi yang berbeda.
+
+## Format yang Tersedia
+
+| Format | Ekstensi | Digunakan Untuk |
+| :--- | :--- | :--- |
+| **PEM (Nginx/Apache)** | `.crt`, `.key` | Server web Linux standar. Anda mendapatkan file Sertifikat dan Private Key terpisah. |
+| **PFX / PKCS#12** | `.pfx`, `.p12` | IIS (Windows), Microsoft Exchange, Sertifikat Klien (S/MIME). Berisi key dan cert sekaligus. |
+| **JKS (Java)** | `.jks` | Aplikasi Java (Tomcat, Spring Boot). |
+
+## Cara Mengunduh (Salin & Simpan)
+
+Dashboard memungkinkan Anda untuk menyalin data mentah sertifikat secara langsung.
+
+1.  Buka menu **"My Certificates"** dan klik tombol **View (Ikon Mata)** pada sertifikat Anda.
+2.  **Sertifikat:** Gulir ke bagian "Certificate (CRT)" dan klik **Ikon Salin** di pojok kanan atas. Simpan ke dalam file bernama `domain.crt` atau `domain.pem`.
+3.  **Private Key:** Gulir ke bagian "Private Key (KEY)", klik **Show**, lalu klik **Ikon Salin**. Simpan ke dalam file bernama `domain.key`.
+
+> [!TIP]
+> Gunakan editor teks murni (Notepad, VS Code, Nano) untuk menyimpan file-file ini. Jangan gunakan Word atau editor Rich Text.
+
+> [!WARNING]
+> **Private Key** dihasilkan secara aman secara lokal di browser/server. Jika Anda menghilangkannya, kunci tersebut **TIDAK BISA** dipulihkan. Anda harus melakukan revoke dan menerbitkan ulang sertifikat.
+
+## Contoh Instalasi
+
+### Nginx (PEM)
+```nginx
+server {
+    listen 443 ssl;
+    server_name internal.app;
+
+    ssl_certificate     /etc/nginx/ssl/internal.app.crt;
+    ssl_certificate_key /etc/nginx/ssl/internal.app.key;
+}
+```
+
+### Windows (PFX)
+1. Klik dua kali file `.pfx` yang diunduh.
+2. Ikuti "Certificate Import Wizard".
+3. Saat diminta kata sandi, masukkan kata sandi yang Anda tetapkan saat mengunduh (atau kata sandi ekspor default yang disediakan di UI).

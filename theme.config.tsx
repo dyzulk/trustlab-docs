@@ -11,6 +11,10 @@ const config: DocsThemeConfig = {
     </div>
   ),
   logoLink: '/',
+  i18n: [
+    { locale: 'en', text: 'English' },
+    { locale: 'id', text: 'Bahasa Indonesia' }
+  ],
   project: {
     link: 'https://github.com/dyzulk/trustlab-docs',
   },
@@ -25,7 +29,7 @@ const config: DocsThemeConfig = {
   docsRepositoryBase: 'https://github.com/dyzulk/trustlab-docs/tree/main',
   useNextSeoProps() {
     const { asPath } = useRouter()
-    if (asPath === '/') {
+    if (asPath.includes('/index') || asPath.endsWith('/en/') || asPath.endsWith('/id/')) {
       return {
         titleTemplate: 'TrustLab - Private Certificate Authority'
       }

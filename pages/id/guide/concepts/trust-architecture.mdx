@@ -1,0 +1,50 @@
+import { Steps } from 'nextra/components'
+import { Shield, Lock, Server, Users } from 'lucide-react'
+
+# Arsitektur Kepercayaan
+
+Arsitektur TrustLab dibangun di atas prinsip isolasi dan keamanan berlapis. Kami menggunakan struktur otoritas bertingkat untuk memastikan integritas jaringan Anda tetap terjaga.
+
+## Hirarki Otoritas Sertifikat
+
+Untuk keamanan maksimal, TrustLab tidak menggunakan satu kunci untuk semua hal. Kami menggunakan hirarki berikut:
+
+### 1. Root CA (Offline Root)
+Ini adalah "Ayah" dari segala kepercayaan. Key ini sangat sensitif dan idealnya jarang digunakan. Dalam infrastruktur yang sangat ketat, Root CA biasanya tetap offline.
+
+### 2. Intermediate CA (Issuing CA)
+TrustLab secara otomatis membuat Intermediate CA yang menandatangani sertifikat pengguna Anda. Jika Intermediate CA disusupi, Root CA dapat mencabutnya tanpa merusak seluruh ekosistem keamanan Anda.
+
+### 3. End-Entity Certificates
+Aplikasi atau server Anda menggunakan sertifikat ini. Mereka memiliki masa berlaku yang lebih pendek (biasanya 1 tahun atau kurang) untuk meminimalkan risiko.
+
+---
+
+## Alur Penerbitan Sertifikat
+
+Bagaimana data Anda berpindah dari dashboard hingga menjadi sertifikat sah?
+
+<Steps>
+### Permintaan Klien (CSR)
+Dashboard membuat sepasang kunci (Public & Private). Public key dikirim dalam format Certificate Signing Request (CSR).
+
+### Validasi Internal
+Dashboard TrustLab memverifikasi identitas Anda dan hak akses Anda terhadap domain yang diminta.
+
+### Penandatanganan CA
+Intermediate CA menandatangani CSR tersebut menggunakan Private Key CA-nya sendiri.
+
+### Pengiriman Sertifikat
+Sertifikat hasil tanda tangan dikembalikan ke Dashboard untuk Anda unduh.
+</Steps>
+
+---
+
+## Keamanan Kunci (Key Security)
+
+- **Enkripsi saat Istirahat (Encryption at Rest)**: Semua Private Key disimpan dalam database menggunakan enkripsi tingkat tinggi (AES-256).
+- **Isolasi Database**: Hanya layanan CA internal yang memiliki akses ke modul yang mendekripsi key tersebut.
+- **Audit Logs**: Setiap aksi penandatanganan dicatat dalam log sistem yang tidak dapat diubah (immutable logs).
+
+> [!TIP]
+> Jangan pernah membagikan file Private Key (`.key`) Anda kepada siapapun. Siapapun yang memiliki key tersebut bisa menyamar sebagai server Anda.
