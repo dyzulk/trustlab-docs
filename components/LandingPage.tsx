@@ -1,7 +1,55 @@
 import { ArrowRight, Shield, Globe, Lock, Server, Zap, ChevronRight } from "lucide-react";
 import Link from 'next/link';
 
-export function LandingPage() {
+interface LandingPageProps {
+  locale?: 'en' | 'id';
+}
+
+const translations = {
+  en: {
+    hero: {
+      badge: "v1.0 is Live",
+      title: "Secure Your",
+      highlight: "Private Network",
+      description: "TrustLab is the definitive Private Certificate Authority (CA) for your internal infrastructure. Issue military-grade SSL/TLS certificates for Intranets, IoT, and Dev environments.",
+      cta_primary: "Get Started",
+      cta_secondary: "Generate Certificate",
+    },
+    features: {
+      root_ca: { title: "Private Root CA", desc: "Your own sovereign Certificate Authority. Trusted by your devices, unreachable by the public internet." },
+      internal_domains: { title: "Internal Domains", desc: "Issue certificates for .local, .corp, and private IP addresses (192.168.x.x) that Public CAs reject." },
+      smime: { title: "S/MIME Encryption", desc: "Secure internal email communication with employee-to-employee encryption." },
+      infrastructure: { title: "Infrastructure", desc: "Seamless integration guides for Nginx, IIS, Apache, and containerized environments." },
+      instant: { title: "Instant Issuance", desc: "No validation delays. Certificates are issued instantly via our modern dashboard." },
+      start: { title: "Start Now", desc: "Follow the Setup Guide to install the Root CA and go green in minutes." },
+      learn_more: "Learn more"
+    }
+  },
+  id: {
+    hero: {
+      badge: "v1.0 Sudah Rilis",
+      title: "Amankan",
+      highlight: "Jaringan Pribadi Anda",
+      description: "TrustLab adalah Otoritas Sertifikat (CA) Pribadi definitif untuk infrastruktur internal Anda. Terbitkan sertifikat SSL/TLS kelas militer untuk Intranet, IoT, dan lingkungan Dev.",
+      cta_primary: "Mulai Sekarang",
+      cta_secondary: "Buat Sertifikat",
+    },
+    features: {
+      root_ca: { title: "Root CA Pribadi", desc: "Otoritas Sertifikat berdaulat Anda sendiri. Dipercaya oleh perangkat Anda, tidak terjangkau oleh internet publik." },
+      internal_domains: { title: "Domain Internal", desc: "Terbitkan sertifikat untuk .local, .corp, dan alamat IP pribadi (192.168.x.x) yang ditolak oleh CA Publik." },
+      smime: { title: "Enkripsi S/MIME", desc: "Amankan komunikasi email internal dengan enkripsi antar karyawan." },
+      infrastructure: { title: "Infrastruktur", desc: "Panduan integrasi mulus untuk Nginx, IIS, Apache, dan lingkungan container." },
+      instant: { title: "Penerbitan Instan", desc: "Tanpa penundaan validasi. Sertifikat diterbitkan secara instan melalui dashboard modern kami." },
+      start: { title: "Mulai Sekarang", desc: "Ikuti Panduan Pengaturan untuk menginstal Root CA dan aman dalam hitungan menit." },
+      learn_more: "Pelajari selengkapnya"
+    }
+  }
+};
+
+export function LandingPage({ locale = 'en' }: LandingPageProps) {
+  console.log('LandingPage Locale:', locale);
+  const t = translations[locale] || translations.en;
+  
   return (
     <div className="flex flex-col gap-16 py-8">
       {/* Hero Section */}
@@ -15,23 +63,23 @@ export function LandingPage() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
             </span>
-            v1.0 is Live
+            {t.hero.badge}
           </div>
           
           <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-neutral-900 dark:text-neutral-100 mb-4">
-            Secure Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">Private Network</span>
+            {t.hero.title} <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">{t.hero.highlight}</span>
           </h1>
           
           <p className="text-lg text-neutral-600 dark:text-neutral-400 leading-relaxed max-w-xl">
-            TrustLab is the definitive Private Certificate Authority (CA) for your internal infrastructure. Issue military-grade SSL/TLS certificates for Intranets, IoT, and Dev environments.
+            {t.hero.description}
           </p>
           
           <div className="flex flex-wrap gap-4 mt-8">
             <Link href="https://trustlab.dyzulk.com/signup" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all hover:scale-105 shadow-lg shadow-blue-500/20">
-              Get Started <ArrowRight className="w-4 h-4" />
+              {t.hero.cta_primary} <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link href="/guide/certificates/request-new" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700 font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-all">
-              Generate Certificate
+            <Link href={locale === 'id' ? "/guide/certificates/request-new" : "/guide/certificates/request-new"} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700 font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-all">
+              {t.hero.cta_secondary}
             </Link>
           </div>
         </div>
@@ -41,47 +89,53 @@ export function LandingPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <FeatureCard 
           icon={<Shield className="w-6 h-6 text-emerald-500" />}
-          title="Private Root CA"
-          description="Your own sovereign Certificate Authority. Trusted by your devices, unreachable by the public internet."
-          link="/guide/concepts/pki-undamentals"
+          title={t.features.root_ca.title}
+          description={t.features.root_ca.desc}
+          link={locale === 'id' ? "/guide/concepts/pki-fundamentals" : "/guide/concepts/pki-fundamentals"}
+          learnMoreText={t.features.learn_more}
         />
         <FeatureCard 
           icon={<Globe className="w-6 h-6 text-blue-500" />}
-          title="Internal Domains"
-          description="Issue certificates for .local, .corp, and private IP addresses (192.168.x.x) that Public CAs reject."
-          link="/guide/certificates/request-new"
+          title={t.features.internal_domains.title}
+          description={t.features.internal_domains.desc}
+          link={locale === 'id' ? "/guide/certificates/request-new" : "/guide/certificates/request-new"}
+          learnMoreText={t.features.learn_more}
         />
         <FeatureCard 
           icon={<Lock className="w-6 h-6 text-violet-500" />}
-          title="S/MIME Encryption"
-          description="Secure internal email communication with employee-to-employee encryption."
-          link="/guide/integrations/smime"
+          title={t.features.smime.title}
+          description={t.features.smime.desc}
+          link={locale === 'id' ? "/guide/integrations/smime" : "/guide/integrations/smime"}
+          learnMoreText={t.features.learn_more}
         />
         <FeatureCard 
           icon={<Server className="w-6 h-6 text-orange-500" />}
-          title="Infrastructure"
-          description="Seamless integration guides for Nginx, IIS, Apache, and containerized environments."
-          link="/guide/integrations/web-servers"
+          title={t.features.infrastructure.title}
+          description={t.features.infrastructure.desc}
+          link={locale === 'id' ? "/guide/integrations/web-servers" : "/guide/integrations/web-servers"}
+          learnMoreText={t.features.learn_more}
         />
         <FeatureCard 
           icon={<Zap className="w-6 h-6 text-yellow-500" />}
-          title="Instant Issuance"
-          description="No validation delays. Certificates are issued instantly via our modern dashboard."
-          link="/guide/getting-started/access-dashboard"
+          title={t.features.instant.title}
+          description={t.features.instant.desc}
+          link={locale === 'id' ? "/guide/getting-started/access-dashboard" : "/guide/getting-started/access-dashboard"}
+          learnMoreText={t.features.learn_more}
         />
         <FeatureCard 
           icon={<ArrowRight className="w-6 h-6 text-neutral-500" />}
-          title="Start Now"
-          description="Follow the Setup Guide to install the Root CA and go green in minutes."
-          link="/guide/getting-started/install-root-ca"
+          title={t.features.start.title}
+          description={t.features.start.desc}
+          link={locale === 'id' ? "/guide/getting-started/install-root-ca" : "/guide/getting-started/install-root-ca"}
           isAction
+          learnMoreText={t.features.learn_more}
         />
       </div>
     </div>
   );
 }
 
-function FeatureCard({ icon, title, description, link, isAction }: any) {
+function FeatureCard({ icon, title, description, link, isAction, learnMoreText }: any) {
   return (
     <Link href={link} className={`group flex flex-col p-6 rounded-2xl border transition-all duration-300 ${isAction ? 'bg-neutral-900 text-white border-neutral-900 dark:bg-neutral-100 dark:text-neutral-900' : 'bg-white dark:bg-neutral-900 border-neutral-200 dark:border-neutral-800 hover:border-blue-500/50 hover:shadow-lg dark:hover:border-blue-500/30'}`}>
       <div className={`mb-4 p-3 rounded-xl w-fit ${isAction ? 'bg-white/10 dark:bg-black/10' : 'bg-neutral-50 dark:bg-neutral-800'}`}>
@@ -92,7 +146,7 @@ function FeatureCard({ icon, title, description, link, isAction }: any) {
         {description}
       </p>
       <div className={`mt-auto flex items-center text-sm font-medium ${isAction ? 'text-blue-400 dark:text-blue-600' : 'text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-[-10px] group-hover:translate-x-0'}`}>
-        Learn more <ChevronRight className="w-4 h-4 ml-1" />
+        {learnMoreText} <ChevronRight className="w-4 h-4 ml-1" />
       </div>
     </Link>
   )

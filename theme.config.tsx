@@ -46,6 +46,9 @@ const config: DocsThemeConfig = {
   footer: {
     text: 'TrustLab Documentation',
   },
+  search: {
+    placeholder: 'Search documentation...'
+  }
 }
 
 export default config
