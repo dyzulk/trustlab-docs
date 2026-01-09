@@ -11,10 +11,7 @@ const config: DocsThemeConfig = {
     </div>
   ),
   logoLink: '/',
-  i18n: [
-    { locale: 'en', text: 'English' },
-    { locale: 'id', text: 'Bahasa Indonesia' }
-  ],
+
   project: {
     link: 'https://github.com/dyzulk/trustlab-docs',
   },

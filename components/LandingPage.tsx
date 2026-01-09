@@ -1,58 +1,27 @@
 import { ArrowRight, Shield, Globe, Lock, Server, Zap, ChevronRight } from "lucide-react";
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-
-interface LandingPageProps {
-  locale?: string;
-}
-
 const translations = {
-  en: {
-    hero: {
-      badge: "v1.0 is Live",
-      title: "Secure Your",
-      highlight: "Private Network",
-      description: "TrustLab is the definitive Private Certificate Authority (CA) for your internal infrastructure. Issue military-grade SSL/TLS certificates for Intranets, IoT, and Dev environments.",
-      cta_primary: "Get Started",
-      cta_secondary: "Generate Certificate",
-    },
-    features: {
-      root_ca: { title: "Private Root CA", desc: "Your own sovereign Certificate Authority. Trusted by your devices, unreachable by the public internet." },
-      internal_domains: { title: "Internal Domains", desc: "Issue certificates for .local, .corp, and private IP addresses (192.168.x.x) that Public CAs reject." },
-      smime: { title: "S/MIME Encryption", desc: "Secure internal email communication with employee-to-employee encryption." },
-      infrastructure: { title: "Infrastructure", desc: "Seamless integration guides for Nginx, IIS, Apache, and containerized environments." },
-      instant: { title: "Instant Issuance", desc: "No validation delays. Certificates are issued instantly via our modern dashboard." },
-      start: { title: "Start Now", desc: "Follow the Setup Guide to install the Root CA and go green in minutes." },
-      learn_more: "Learn more"
-    }
+  hero: {
+    badge: "v1.0 is Live",
+    title: "Secure Your",
+    highlight: "Private Network",
+    description: "TrustLab is the definitive Private Certificate Authority (CA) for your internal infrastructure. Issue military-grade SSL/TLS certificates for Intranets, IoT, and Dev environments.",
+    cta_primary: "Get Started",
+    cta_secondary: "Generate Certificate",
   },
-  id: {
-    hero: {
-      badge: "v1.0 Sudah Rilis",
-      title: "Amankan",
-      highlight: "Jaringan Pribadi Anda",
-      description: "TrustLab adalah Otoritas Sertifikat (CA) Pribadi definitif untuk infrastruktur internal Anda. Terbitkan sertifikat SSL/TLS kelas militer untuk Intranet, IoT, dan lingkungan Dev.",
-      cta_primary: "Mulai Sekarang",
-      cta_secondary: "Buat Sertifikat",
-    },
-    features: {
-      root_ca: { title: "Root CA Pribadi", desc: "Otoritas Sertifikat berdaulat Anda sendiri. Dipercaya oleh perangkat Anda, tidak terjangkau oleh internet publik." },
-      internal_domains: { title: "Domain Internal", desc: "Terbitkan sertifikat untuk .local, .corp, dan alamat IP pribadi (192.168.x.x) yang ditolak oleh CA Publik." },
-      smime: { title: "Enkripsi S/MIME", desc: "Amankan komunikasi email internal dengan enkripsi antar karyawan." },
-      infrastructure: { title: "Infrastruktur", desc: "Panduan integrasi mulus untuk Nginx, IIS, Apache, dan lingkungan container." },
-      instant: { title: "Penerbitan Instan", desc: "Tanpa penundaan validasi. Sertifikat diterbitkan secara instan melalui dashboard modern kami." },
-      start: { title: "Mulai Sekarang", desc: "Ikuti Panduan Pengaturan untuk menginstal Root CA dan aman dalam hitungan menit." },
-      learn_more: "Pelajari selengkapnya"
-    }
+  features: {
+    root_ca: { title: "Private Root CA", desc: "Your own sovereign Certificate Authority. Trusted by your devices, unreachable by the public internet." },
+    internal_domains: { title: "Internal Domains", desc: "Issue certificates for .local, .corp, and private IP addresses (192.168.x.x) that Public CAs reject." },
+    smime: { title: "S/MIME Encryption", desc: "Secure internal email communication with employee-to-employee encryption." },
+    infrastructure: { title: "Infrastructure", desc: "Seamless integration guides for Nginx, IIS, Apache, and containerized environments." },
+    instant: { title: "Instant Issuance", desc: "No validation delays. Certificates are issued instantly via our modern dashboard." },
+    start: { title: "Start Now", desc: "Follow the Setup Guide to install the Root CA and go green in minutes." },
+    learn_more: "Learn more"
   }
 };
 
-export function LandingPage({ locale: propLocale }: LandingPageProps) {
-  const { locale: routerLocale, defaultLocale } = useRouter();
-  const currentLocale = (propLocale || routerLocale || defaultLocale || 'en') as 'en' | 'id';
-  
-  console.log('LandingPage Final Locale:', currentLocale);
-  const t = translations[currentLocale] || translations.en;
+export function LandingPage() {
+  const t = translations;
   
   return (
     <div className="flex flex-col gap-16 py-8">
@@ -82,7 +51,7 @@ export function LandingPage({ locale: propLocale }: LandingPageProps) {
             <Link href="https://trustlab.dyzulk.com/signup" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all hover:scale-105 shadow-lg shadow-blue-500/20">
               {t.hero.cta_primary} <ArrowRight className="w-4 h-4" />
             </Link>
-            <Link href={locale === 'id' ? "/guide/certificates/request-new" : "/guide/certificates/request-new"} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700 font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-all">
+            <Link href="/guide/certificates/request-new" className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-white dark:bg-neutral-800 text-neutral-900 dark:text-white border border-neutral-200 dark:border-neutral-700 font-semibold hover:bg-neutral-50 dark:hover:bg-neutral-700 transition-all">
               {t.hero.cta_secondary}
             </Link>
           </div>
@@ -95,42 +64,42 @@ export function LandingPage({ locale: propLocale }: LandingPageProps) {
           icon={<Shield className="w-6 h-6 text-emerald-500" />}
           title={t.features.root_ca.title}
           description={t.features.root_ca.desc}
-          link={locale === 'id' ? "/guide/concepts/pki-fundamentals" : "/guide/concepts/pki-fundamentals"}
+          link="/guide/concepts/pki-fundamentals"
           learnMoreText={t.features.learn_more}
         />
         <FeatureCard 
           icon={<Globe className="w-6 h-6 text-blue-500" />}
           title={t.features.internal_domains.title}
           description={t.features.internal_domains.desc}
-          link={locale === 'id' ? "/guide/certificates/request-new" : "/guide/certificates/request-new"}
+          link="/guide/certificates/request-new"
           learnMoreText={t.features.learn_more}
         />
         <FeatureCard 
           icon={<Lock className="w-6 h-6 text-violet-500" />}
           title={t.features.smime.title}
           description={t.features.smime.desc}
-          link={locale === 'id' ? "/guide/integrations/smime" : "/guide/integrations/smime"}
+          link="/guide/integrations/smime"
           learnMoreText={t.features.learn_more}
         />
         <FeatureCard 
           icon={<Server className="w-6 h-6 text-orange-500" />}
           title={t.features.infrastructure.title}
           description={t.features.infrastructure.desc}
-          link={locale === 'id' ? "/guide/integrations/web-servers" : "/guide/integrations/web-servers"}
+          link="/guide/integrations/web-servers"
           learnMoreText={t.features.learn_more}
         />
         <FeatureCard 
           icon={<Zap className="w-6 h-6 text-yellow-500" />}
           title={t.features.instant.title}
           description={t.features.instant.desc}
-          link={locale === 'id' ? "/guide/getting-started/access-dashboard" : "/guide/getting-started/access-dashboard"}
+          link="/guide/getting-started/access-dashboard"
           learnMoreText={t.features.learn_more}
         />
         <FeatureCard 
           icon={<ArrowRight className="w-6 h-6 text-neutral-500" />}
           title={t.features.start.title}
           description={t.features.start.desc}
-          link={locale === 'id' ? "/guide/getting-started/install-root-ca" : "/guide/getting-started/install-root-ca"}
+          link="/guide/getting-started/install-root-ca"
           isAction
           learnMoreText={t.features.learn_more}
         />
