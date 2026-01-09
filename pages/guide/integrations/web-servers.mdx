@@ -24,7 +24,7 @@ Select your web server environment below:
     ### Nginx Setup
     Target File: `/etc/nginx/sites-available/default` or `internal.app.conf`
     
-    ```nginx
+    ```nginx copy
     server {
         listen 80;
         server_name internal.app;
@@ -50,7 +50,7 @@ Select your web server environment below:
     ### Apache / HTTPD Setup
     Target File: `/etc/httpd/conf.d/ssl.conf` or VHost file.
 
-    ```apache
+    ```apache copy
     <VirtualHost *:443>
         ServerName internal.app
         DocumentRoot /var/www/html/internal

@@ -21,22 +21,22 @@ Select your distribution to get the optimized installation command:
 
 <Tabs items={['Debian/Ubuntu', 'RHEL/CentOS', 'Arch Linux', 'Universal']}>
   <Tabs.Tab>
-    ```bash
+    ```bash copy
     sudo apt update && sudo apt install -y curl && curl -sL https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.sh | sudo bash
     ```
   </Tabs.Tab>
   <Tabs.Tab>
-    ```bash
+    ```bash copy
     (sudo yum install -y curl || sudo dnf install -y curl) && curl -sL https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.sh | sudo bash
     ```
   </Tabs.Tab>
   <Tabs.Tab>
-    ```bash
+    ```bash copy
     sudo pacman -Sy --noconfirm curl && curl -sL https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.sh | sudo bash
     ```
   </Tabs.Tab>
   <Tabs.Tab>
-    ```bash
+    ```bash copy
     curl -sL https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.sh | sudo bash
     ```
   </Tabs.Tab>

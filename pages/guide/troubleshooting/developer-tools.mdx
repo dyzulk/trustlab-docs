@@ -30,13 +30,13 @@ Standard command-line tools often look for a specific bundle file.
 
 **Solution:**
 Pass the Root CA explicitly:
-```bash
+```bash copy
 curl --cacert /path/to/trustlab-root.crt https://your-domain.local
 ```
 
 ### Wget
 **Solution:**
-```bash
+```bash copy
 wget --ca-certificate=/path/to/trustlab-root.crt https://your-domain.local
 ```
 
@@ -53,7 +53,7 @@ Node.js does not use the System Root CA by default.
 **Solution (Environment Variable):**
 Set this variable before running your application. It works for most Node.js apps (npm, yarn, custom scripts).
 
-```bash
+```bash copy
 export NODE_EXTRA_CA_CERTS="/path/to/trustlab-root.crt"
 node server.js
 ```
@@ -71,7 +71,7 @@ Python's `requests` library (and `pip`) uses its own certificate bundle (`certif
 **Solution:**
 Point to your Root CA using an environment variable.
 
-```bash
+```bash copy
 export REQUESTS_CA_BUNDLE="/path/to/trustlab-root.crt"
 python script.py
 ```
@@ -94,7 +94,7 @@ You must import the TrustLab Root CA into the Java Keystore (cacerts).
 Usually at `$JAVA_HOME/lib/security/cacerts`.
 
 ### Import with keytool
-```bash
+```bash copy
 keytool -import -trustcacerts -alias trustlab-root \
   -file trustlab-root.crt \
   -keystore "$JAVA_HOME/lib/security/cacerts"
