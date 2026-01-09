@@ -1,17 +1,17 @@
 import { Tabs, Steps, Cards, Card, Callout } from 'nextra/components'
 import { Monitor, Smartphone, AlertTriangle, Info } from 'lucide-react'
 
-# Installing Root CA
+# Menginstal Root CA
 
-To ensure your browser trusts certificates issued by TrustLab, you must install our Root CA.
+Untuk memastikan browser Anda mempercayai sertifikat yang diterbitkan oleh TrustLab, Anda harus menginstal Root CA kami.
 
-## Quick Installation (Bundle)
+## Instalasi Cepat (Bundle)
 
-Instantly install **ALL** TrustLab Root & Intermediate certificates using our automated bundle scripts.
+Instal secara instan **SEMUA** sertifikat Root & Intermediate TrustLab menggunakan skrip bundle otomatis kami.
 
 ### Linux / Server (CLI)
 
-Select your distribution to get the optimized installation command:
+Pilih distribusi Anda untuk mendapatkan perintah instalasi yang dioptimalkan:
 
 <Tabs items={['Debian/Ubuntu', 'RHEL/CentOS', 'Arch Linux', 'Universal']}>
   <Tabs.Tab>
@@ -36,27 +36,29 @@ Select your distribution to get the optimized installation command:
   </Tabs.Tab>
 </Tabs>
 
-### Windows & Apple Ecosystem
+### Ekosistem Windows & Apple
 
 <Cards>
   <Card icon={<Monitor className="w-6 h-6" />} title="Windows Bundle Installer (.bat)" href="https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.bat" arrow />
   <Card icon={<Smartphone className="w-6 h-6" />} title="macOS / iOS Profile (.mobileconfig)" href="https://cdn.trustlab.dyzulk.com/ca/bundles/trustlab-all.mobileconfig" arrow />
 </Cards>
 
+
 <Callout type="warning" emoji={<AlertTriangle className="w-5 h-5" />}>
-  **Windows Users:** You **MUST** right-click the `.bat` file and select **"Run as Administrator"**. Double-clicking directly will likely fail due to permission restrictions.
+  **Pengguna Windows:** Anda **WAJIB** klik kanan file `.bat` dan pilih **"Run as Administrator"**. Mengklik dua kali secara langsung kemungkinan besar akan gagal karena batasan izin.
 </Callout>
 
+
 <Callout type="info" emoji={<Info className="w-5 h-5" />}>
-  **Apple Users:** After downloading the profile, go to **System Settings > Privacy & Security > Profiles** to install it. For iOS, see the *Individual Installation* section below for detailed trust steps.
+  **Pengguna Apple:** Setelah mengunduh profil, buka **System Settings > Privacy & Security > Profiles** untuk menginstalnya. Untuk iOS, lihat bagian *Instalasi Sertifikat Individu* di bawah untuk langkah-langkah kepercayaan mendetail.
 </Callout>
 
 ---
 
-import { DynamicInstallationGuide } from '../../../../components/DynamicInstallationGuide'
+import { DynamicInstallationGuide } from '../../../components/DynamicInstallationGuide'
 
-## Individual Certificate Installation
+## Instalasi Sertifikat Individu
 
-If you need to install specific certificates individually (e.g. only Root, or specific Intermediate), use the live guide below.
+Jika Anda perlu menginstal sertifikat tertentu secara individu (misal: hanya Root, atau Intermediate tertentu), gunakan panduan langsung di bawah ini.
 
-<DynamicInstallationGuide />
+<DynamicInstallationGuide locale="id" />
