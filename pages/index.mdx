@@ -1,9 +1,8 @@
+---
+title: Home
+---
+
 import { useRouter } from 'next/router'
 import { LandingPage } from '../components/LandingPage'
 
-export const Index = () => {
-  const { locale } = useRouter()
-  return <LandingPage locale={locale} />
-}
-
-<Index />
+<LandingPage/>
