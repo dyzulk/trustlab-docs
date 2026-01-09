@@ -1,0 +1,71 @@
+import { Tabs } from 'nextra/components'
+import { Code, Terminal, Send, ShieldCheck } from 'lucide-react'
+
+# Titik Akhir (Endpoints)
+
+Gunakan titik akhir API berikut untuk melakukan integrasi programatik dengan layanan TrustLab.
+
+## Dasar URL
+Semua permintaan API dilakukan ke:
+`https://trustlab.dyzulk.com/api`
+
+---
+
+## Pengambilan Sertifikat Publik
+
+Endpoint ini digunakan untuk mengambil informasi publik mengenai sertifikat atau CA.
+
+### 1. Unduh Root CA
+Mengunduh sertifikat root pemegang kepercayaan utama.
+
+- **Endpoint**: `GET /ca/root/download`
+- **Output**: File `trustlab-root.crt`
+
+### 2. Lihat Detail Sertifikat (via Serial)
+Mendapatkan metadata sertifikat berdasarkan nomor serinya.
+
+- **Endpoint**: `GET /certificates/detail/{serial_number}`
+- **Respon Contoh**:
+```json
+{
+  "serial": "12345-ABCDE",
+  "common_name": "myserver.local",
+  "issuer": "TrustLab Intermediate CA",
+  "not_after": "2025-12-31T23:59:59Z",
+  "status": "VALID"
+}
+```
+
+---
+
+## Contoh Implementasi (cURL)
+
+<Tabs items={['Unduh Root', 'Cek Status']}>
+  <Tabs.Tab>
+    ```bash
+    curl -O https://trustlab.dyzulk.com/api/ca/root/download
+    ```
+  </Tabs.Tab>
+  <Tabs.Tab>
+    ```bash
+    curl https://trustlab.dyzulk.com/api/certificates/detail/99887766
+    ```
+  </Tabs.Tab>
+</Tabs>
+
+---
+
+## Status Respon API
+
+TrustLab menggunakan kode status HTTP standar:
+
+| Kode | Arti |
+| :--- | :--- |
+| `200 OK` | Permintaan berhasil. |
+| `404 Not Found` | Sertifikat tidak ditemukan. |
+| `500 Server Error` | Terjadi masalah pada database TrustLab. |
+
+---
+
+> [!IMPORTANT]
+> Fitur manajemen sertifikat penuh (Create, Revoke, Renew) via API saat ini masih dalam tahap **Beta Tertutup**. Silakan hubungi admin untuk mendapatkan akses API Key jika Anda memerlukannya untuk otomatisasi infrastruktur.

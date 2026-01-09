@@ -1,3 +1,10 @@
-import { LandingPage } from '../components/LandingPage'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
 
-<LandingPage />
+export default function Root() {
+  const router = useRouter()
+  useEffect(() => {
+    router.replace('/en')
+  }, [router])
+  return null
+}

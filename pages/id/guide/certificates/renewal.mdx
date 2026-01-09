@@ -1,0 +1,60 @@
+import { Steps } from 'nextra/components'
+import { RefreshCcw, Bell, ShieldCheck } from 'lucide-react'
+
+# Proses Perpanjangan
+
+Sertifikat SSL/TLS memiliki masa aktif yang terbatas. Di TrustLab, kami menyederhanakan proses perpanjangan (renewal) untuk memastikan layanan Anda tetap berjalan tanpa gangguan.
+
+## Kapan Harus Memperpanjang?
+
+- **Rekomendasi**: Lakukan perpanjangan **30 hari** sebelum sertifikat kadaluarsa.
+- **Notifikasi**: TrustLab akan mengirimkan pengingat email otomatis ke akun Anda pada H-30, H-7, dan H-1 sebelum masa berlaku habis.
+
+---
+
+## Proses Pembaruan
+
+Sertifikat memiliki masa berlaku untuk menjamin rotasi keamanan. TrustLab menyederhanakan proses pembaruan agar Anda tidak mengalami downtime.
+
+## Kapan Harus Memperbarui?
+Anda akan menerima notifikasi email:
+- **30 hari** sebelum kedaluwarsa.
+- **7 hari** sebelum kedaluwarsa.
+- **1 hari** sebelum kedaluwarsa.
+
+## Cara Memperbarui (Penerbitan Ulang Manual)
+
+Untuk memperbarui sertifikat, Anda cukup membuat sertifikat baru dengan nama domain yang sama.
+
+<Steps>
+### Buka Dashboard
+Login ke [trustlab.dyzulk.com](https://trustlab.dyzulk.com) dan masuk ke menu **"Manage Certificates"**.
+
+1.  Buka menu **Certificates** dan klik **"Generate New"**.
+2.  **Identity**: Masukkan **Common Name (CN) yang sama** dengan sertifikat Anda yang akan habis masa berlakunya.
+3.  **Generate**: Sistem akan menerbitkan sertifikat baru dengan masa berlaku yang segar.
+4.  **Ganti**: Unduh `.crt` baru (dan `.key` jika Anda tidak menggunakan kembali CSR) dan ganti file di server Anda.
+</Steps>
+
+> [!NOTE]
+> Sertifikat lama akan tetap valid sampai habis masa berlakunya secara alami. Anda dapat menghapusnya dengan aman setelah memastikan sertifikat baru berfungsi.
+
+## Apa yang Terjadi Selanjutnya?
+- **Sertifikat baru** dihasilkan dengan masa berlaku baru.
+- **Private Key** tetap sama (jika "Reuse Key" dipilih) ATAU kunci baru dihasilkan (disarankan).
+- Sertifikat lama tetap valid hingga tanggal kedaluwarsa aslinya (kecuali dicabut).
+
+> [!IMPORTANT]
+> Anda harus **mengunduh dan menginstal sertifikat baru** di server Anda. Pembaruan **tidak terjadi otomatis** di sisi server kecuali Anda menggunakan integrasi ACME kami.
+
+---
+
+## Penting: Mengapa Harus Perpanjang?
+
+Jika sertifikat kadaluarsa sebelum diganti:
+- Browser akan memblokir akses ke situs Anda dengan pesan **"Your connection is not private"**.
+- API internal akan gagal melakukan enkripsi (SSL Handshake Error).
+- Pengguna akan kehilangan kepercayaan terhadap keamanan jaringan Anda.
+
+> [!TIP]
+> Perpanjangan di TrustLab tidak mengubah Root CA Anda. Anda **tidak perlu** menginstal ulang Root CA di perangkat klien setiap kali Anda memperpanjang sertifikat server.

@@ -1,0 +1,42 @@
+import { Steps } from 'nextra/components'
+import { Search, Eye, Clipboard, ShieldAlert } from 'lucide-react'
+
+# Lihat Detail Sertifikat
+
+Setiap sertifikat di TrustLab memiliki metadata lengkap yang bisa Anda audit kapan saja untuk memastikan kesesuaian identitas dan keamanan.
+
+## Cara Melihat Detail
+
+<Steps>
+### Navigasi ke List
+Di menu utama Dashboard, klik **"Manage Certificates"**. Anda akan melihat daftar semua sertifikat yang pernah diterbitkan.
+
+### Klik Ikon Mata
+Gunakan kolom pencarian untuk menemukan domain Anda. Klik tombol **"View Details"** (ikon mata 👁️) di sisi kanan baris sertifikat.
+
+### Tinjau Tab Informasi
+Anda akan melihat detail seperti:
+- **Serial Number**: ID unik sertifikat Anda.
+- **Validity period**: Tanggal mulai dan berakhir.
+- **Issuer**: CA mana yang menandatangani (TrustLab Intermediate).
+- **Public Key Info**: Algoritma yang digunakan (RSA 2048/4096).
+</Steps>
+
+---
+
+## Audit Metadata
+
+Penting untuk memeriksa detail berikut secara berkala:
+
+- **Thumbprint (SHA-1/SHA-256)**: Gunakan fingerprint ini untuk memverifikasi apakah sertifikat yang terpasang di server benar-benar yang Anda terbitkan dari TrustLab.
+- **Subject Alternative Names (SAN)**: Pastikan semua alias domain yang dibutuhkan sudah terdaftar di sini.
+- **Status**: Pastikan statusnya **Valid** (hijau). Jika warnanya merah, berarti sertifikat telah kadaluarsa atau dicabut.
+
+---
+
+## Keamanan Data Detail
+
+Meskipun detail sertifikat (Public) aman untuk dilihat, tim TrustLab menyarankan untuk membatasi akses ke dashboard hanya untuk admin sistem yang berkepentingan untuk mencegah kebocoran informasi topologi jaringan.
+
+> [!TIP]
+> Anda bisa menyalin (copy) Serial Number secara cepat melalui tombol clipboard di samping teks untuk keperluan dokumentasi internal atau konfigurasi firewall.
