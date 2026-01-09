@@ -1,8 +1,9 @@
 import { ArrowRight, Shield, Globe, Lock, Server, Zap, ChevronRight } from "lucide-react";
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 interface LandingPageProps {
-  locale?: 'en' | 'id';
+  locale?: string;
 }
 
 const translations = {
@@ -46,9 +47,12 @@ const translations = {
   }
 };
 
-export function LandingPage({ locale = 'en' }: LandingPageProps) {
-  console.log('LandingPage Locale:', locale);
-  const t = translations[locale] || translations.en;
+export function LandingPage({ locale: propLocale }: LandingPageProps) {
+  const { locale: routerLocale, defaultLocale } = useRouter();
+  const currentLocale = (propLocale || routerLocale || defaultLocale || 'en') as 'en' | 'id';
+  
+  console.log('LandingPage Final Locale:', currentLocale);
+  const t = translations[currentLocale] || translations.en;
   
   return (
     <div className="flex flex-col gap-16 py-8">
